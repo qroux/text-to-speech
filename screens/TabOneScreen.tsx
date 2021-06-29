@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Button, ScrollView, Linking } from 'react-native';
-import * as Speech from 'expo-speech';
+import * as IntentLauncher from 'expo-intent-launcher';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -14,7 +14,12 @@ export default function TabOneScreen() {
         lightColor='#eee'
         darkColor='rgba(255,255,255,0.1)'
       />
-      <Button title='link to settings' onPress={() => console.log('ok')} />
+      <Button
+        title='link to settings'
+        onPress={() =>
+          IntentLauncher.startActivityAsync(IntentLauncher.ACTION_SETTINGS)
+        }
+      />
     </View>
   );
 }
