@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Button, ScrollView } from 'react-native';
+import { StyleSheet, Button, ScrollView, Linking } from 'react-native';
 import * as Speech from 'expo-speech';
 
 import EditScreenInfo from '../components/EditScreenInfo';
@@ -14,6 +14,7 @@ export default function TabOneScreen() {
         lightColor='#eee'
         darkColor='rgba(255,255,255,0.1)'
       />
+      <Button title='link to settings' onPress={() => console.log('ok')} />
     </View>
   );
 }
