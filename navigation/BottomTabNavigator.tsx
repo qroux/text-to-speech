@@ -43,7 +43,7 @@ export default function BottomTabNavigator() {
       tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
         showIcon: true,
-        showLabel: true,
+        showLabel: false,
       }}>
       <BottomTab.Screen
         name='Progress'
