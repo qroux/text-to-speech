@@ -2,21 +2,30 @@
  * Learn more about createBottomTabNavigator:
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
-
-import {
-  Ionicons,
-  MaterialCommunityIcons,
-  MaterialIcons,
-} from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 
+// SCREENS
+import ProgressScreen from '../screens/ProgressScreen';
+import TextScreen from '../screens/TextScreen';
+import SettingsScreen from '../screens/SettingsScreen';
+import {
+  BottomTabParamList,
+  ProgressParamList,
+  TextParamList,
+  SettingsParamList,
+} from '../types';
+
+// STYLING
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import {
+  Ionicons,
+  MaterialCommunityIcons,
+  MaterialIcons,
+  AntDesign,
+} from '@expo/vector-icons';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -25,23 +34,32 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName='TabOne'
+      initialRouteName='Progress'
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
-        name='TabOne'
-        component={TabOneNavigator}
+        name='Progress'
+        component={ProgressNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialTabBarIcon name='admin-panel-settings' color={color} />
+            <AntDesignTabBarIcon name='barschart' color={color} />
           ),
         }}
       />
       <BottomTab.Screen
-        name='TabTwo'
-        component={TabTwoNavigator}
+        name='Text'
+        component={TextNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <CommunityTabBarIcon name='account-music-outline' color={color} />
+            <CommunityTabBarIcon name='text-to-speech' color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name='Settings'
+        component={SettingsNavigator}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialTabBarIcon name='admin-panel-settings' color={color} />
           ),
         }}
       />
@@ -74,32 +92,53 @@ function MaterialTabBarIcon(props: {
   return <MaterialIcons size={30} style={{ marginBottom: -3 }} {...props} />;
 }
 
+function AntDesignTabBarIcon(props: {
+  name: React.ComponentProps<typeof AntDesign>['name'];
+  color: string;
+}) {
+  return <AntDesign size={30} style={{ marginBottom: -3 }} {...props} />;
+}
+
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const ProgressStack = createStackNavigator<ProgressParamList>();
 
-function TabOneNavigator() {
+function ProgressNavigator() {
   return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name='TabOneScreen'
-        component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+    <ProgressStack.Navigator>
+      <ProgressStack.Screen
+        name='ProgressScreen'
+        component={ProgressScreen}
+        options={{ headerTitle: 'Dashboard' }}
       />
-    </TabOneStack.Navigator>
+    </ProgressStack.Navigator>
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const TextStack = createStackNavigator<TextParamList>();
 
-function TabTwoNavigator() {
+function TextNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name='TabTwoScreen'
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+    <TextStack.Navigator>
+      <TextStack.Screen
+        name='TextScreen'
+        component={TextScreen}
+        options={{ headerTitle: 'Practice' }}
       />
-    </TabTwoStack.Navigator>
+    </TextStack.Navigator>
+  );
+}
+
+const SettingsStack = createStackNavigator<SettingsParamList>();
+
+function SettingsNavigator() {
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen
+        name='Settings'
+        component={SettingsScreen}
+        options={{ headerTitle: 'Settings' }}
+      />
+    </SettingsStack.Navigator>
   );
 }

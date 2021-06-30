@@ -1,24 +1,16 @@
 import * as React from 'react';
 import { StyleSheet, Button, ScrollView, Linking } from 'react-native';
-import * as IntentLauncher from 'expo-intent-launcher';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
-export default function TabOneScreen() {
+export default function ProgressScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Admin Panel</Text>
+      <Text style={styles.title}>Progression DashBoard</Text>
       <View
         style={styles.separator}
         lightColor='#eee'
         darkColor='rgba(255,255,255,0.1)'
-      />
-      <Button
-        title='link to settings'
-        onPress={() =>
-          IntentLauncher.startActivityAsync(IntentLauncher.ACTION_SETTINGS)
-        }
       />
     </View>
   );

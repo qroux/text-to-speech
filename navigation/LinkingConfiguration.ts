@@ -12,14 +12,19 @@ export default {
     screens: {
       Root: {
         screens: {
-          TabOne: {
+          Progress: {
             screens: {
-              TabOneScreen: 'one',
+              ProgressScreen: 'progress',
             },
           },
-          TabTwo: {
+          Text: {
             screens: {
-              TabTwoScreen: 'two',
+              TextScreen: 'text',
+            },
+          },
+          Settings: {
+            screens: {
+              SettingsScreen: 'settings',
             },
           },
         },
