@@ -2,8 +2,12 @@
  * Learn more about createBottomTabNavigator:
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from '@react-navigation/stack';
 import * as React from 'react';
 
 // SCREENS
@@ -27,7 +31,7 @@ import {
   AntDesign,
 } from '@expo/vector-icons';
 
-const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+const BottomTab = createMaterialTopTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
@@ -35,11 +39,17 @@ export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName='Progress'
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      tabBarPosition='bottom'
+      tabBarOptions={{
+        activeTintColor: Colors[colorScheme].tint,
+        showIcon: true,
+        showLabel: true,
+      }}>
       <BottomTab.Screen
         name='Progress'
         component={ProgressNavigator}
         options={{
+          tabBarLabel: 'Progress',
           tabBarIcon: ({ color }) => (
             <AntDesignTabBarIcon name='barschart' color={color} />
           ),
@@ -49,6 +59,7 @@ export default function BottomTabNavigator() {
         name='Text'
         component={TextNavigator}
         options={{
+          tabBarLabel: 'Practice',
           tabBarIcon: ({ color }) => (
             <CommunityTabBarIcon name='text-to-speech' color={color} />
           ),
@@ -58,8 +69,9 @@ export default function BottomTabNavigator() {
         name='Settings'
         component={SettingsNavigator}
         options={{
+          tabBarLabel: 'Settings',
           tabBarIcon: ({ color }) => (
-            <MaterialTabBarIcon name='admin-panel-settings' color={color} />
+            <IoniconsTabBarIcon name='ios-settings-outline' color={color} />
           ),
         }}
       />
@@ -73,7 +85,7 @@ function IoniconsTabBarIcon(props: {
   name: React.ComponentProps<typeof Ionicons>['name'];
   color: string;
 }) {
-  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <Ionicons size={24} style={{ marginBottom: -3 }} {...props} />;
 }
 
 function CommunityTabBarIcon(props: {
@@ -81,7 +93,7 @@ function CommunityTabBarIcon(props: {
   color: string;
 }) {
   return (
-    <MaterialCommunityIcons size={30} style={{ marginBottom: -3 }} {...props} />
+    <MaterialCommunityIcons size={24} style={{ marginBottom: -3 }} {...props} />
   );
 }
 
@@ -89,14 +101,14 @@ function MaterialTabBarIcon(props: {
   name: React.ComponentProps<typeof MaterialIcons>['name'];
   color: string;
 }) {
-  return <MaterialIcons size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <MaterialIcons size={24} style={{ marginBottom: -3 }} {...props} />;
 }
 
 function AntDesignTabBarIcon(props: {
   name: React.ComponentProps<typeof AntDesign>['name'];
   color: string;
 }) {
-  return <AntDesign size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <AntDesign size={24} style={{ marginBottom: -3 }} {...props} />;
 }
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
