@@ -2,10 +2,8 @@ import * as React from 'react';
 import { StyleSheet, Button, ScrollView, Linking } from 'react-native';
 import * as Localization from 'expo-localization';
 import i18n from 'i18n-js';
-import Voice, { SpeechRecognizedEvent } from '@react-native-voice/voice';
 
 import { Text, View } from '../components/Themed';
-import VoiceTest from '../components/VoiceTest';
 
 export default function ProgressScreen() {
   // Set the key-value pairs for the different languages you want to support.
@@ -25,7 +23,6 @@ export default function ProgressScreen() {
         lightColor='#eee'
         darkColor='rgba(255,255,255,0.1)'
       />
-      <VoiceTest />
     </View>
   );
 }
