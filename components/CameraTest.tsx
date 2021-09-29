@@ -32,7 +32,7 @@ export default function CameraTest() {
                   : Camera.Constants.Type.back
               );
             }}>
-            <Text style={styles.text}> Flip </Text>
+            <Text style={styles.text}> Flip it </Text>
           </TouchableOpacity>
         </View>
       </Camera>

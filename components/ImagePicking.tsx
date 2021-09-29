@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Button, Platform, Image, View } from "react-native";
-import * as ImagePicker from "expo-image-picker";
+import React, { useEffect, useState } from 'react';
+import { Button, Platform, Image, View } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 
 const ImagePicking = () => {
   const [img, setImg] = useState<any>(null);
 
   useEffect(() => {
     (async () => {
-      if (Platform.OS !== "web") {
-        const { status } =
-          await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== "granted") {
-          alert("Sorry, we need camera roll permissions to make this work!");
+      if (Platform.OS !== 'web') {
+        const {
+          status,
+        } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
         }
       }
     })();
@@ -35,23 +36,26 @@ const ImagePicking = () => {
     <View>
       <View
         style={{
-          display: "flex",
-          width: "70%",
-          flexDirection: "row",
-          justifyContent: "space-around",
-        }}
-      >
-        <Button title="Pick an image" onPress={pickImage} disabled={!!img} />
+          display: 'flex',
+          width: '70%',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          marginBottom: 20,
+        }}>
+        <Button title='Pick an image' onPress={pickImage} disabled={!!img} />
         <Button
-          title="Analyze"
+          title='Analyze'
           onPress={pickImage}
           disabled={!img}
-          color={"green"}
+          color={'green'}
         />
       </View>
 
       {img && (
-        <Image source={{ uri: img }} style={{ width: "100%", height: 500 }} />
+        <Image
+          source={{ uri: img }}
+          style={{ width: 300, height: 400, resizeMode: 'cover' }}
+        />
       )}
     </View>
   );
