@@ -16,6 +16,7 @@ import expo.modules.ApplicationLifecycleDispatcher;
 import expo.modules.ReactNativeHostWrapper;
 
 import com.facebook.react.bridge.JSIModulePackage;
+import com.qoux.texttospeech.mlkit.TextRecognitionPackage;
 import com.swmansion.reanimated.ReanimatedJSIModulePackage;
 
 import java.lang.reflect.InvocationTargetException;
@@ -35,7 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
       @SuppressWarnings("UnnecessaryLocalVariable")
       List<ReactPackage> packages = new PackageList(this).getPackages();
       // Packages that cannot be autolinked yet can be added manually here, for example:
-      // packages.add(new MyReactNativePackage());
+      packages.add(new TextRecognitionPackage());
       return packages;
     }
 
