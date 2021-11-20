@@ -7,12 +7,15 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableMap;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
@@ -31,8 +34,18 @@ public class TextRecognitionModule extends ReactContextBaseJavaModule {
         return "TextRecognitionModule";
     }
 
+    public WritableMap getRectMap(Rect rect) {
+        WritableMap rectObject = Arguments.createMap();
+        rectObject.putInt("left", rect.left);
+        rectObject.putInt("top", rect.top);
+        rectObject.putInt("width", rect.right - rect.left);
+        rectObject.putInt("height", rect.bottom - rect.top);
+
+        return rectObject;
+    }
+
     @ReactMethod
-    public void recognizeImage(String url) {
+    public void recognizeImage(String url, Promise promise) {
         Log.d("TextRecognitionModule", "Create event called with name: " + url);
 
         Uri uri = Uri.parse(url);
@@ -42,36 +55,45 @@ public class TextRecognitionModule extends ReactContextBaseJavaModule {
             TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
 
 
-                    recognizer.process(image)
-                            .addOnSuccessListener(new OnSuccessListener<Text>() {
-                                @Override
-                                public void onSuccess(Text result) {
-                                    String resultText = result.getText();
-                                    for (Text.TextBlock block : result.getTextBlocks()) {
-                                        String blockText = block.getText();
-                                        Point[] blockCornerPoints = block.getCornerPoints();
-                                        Rect blockFrame = block.getBoundingBox();
-                                        for (Text.Line line : block.getLines()) {
-                                            String lineText = line.getText();
-                                            Point[] lineCornerPoints = line.getCornerPoints();
-                                            Rect lineFrame = line.getBoundingBox();
-                                            for (Text.Element element : line.getElements()) {
-                                                String elementText = element.getText();
-                                                Point[] elementCornerPoints = element.getCornerPoints();
-                                                Rect elementFrame = element.getBoundingBox();
-                                            }
-                                        }
-                                    }
+            recognizer.process(image)
+                    .addOnSuccessListener(new OnSuccessListener<Text>() {
+                        @Override
+                        public void onSuccess(Text result) {
+                            WritableMap response = Arguments.createMap();
+                            response.putInt("width", image.getWidth());
+                            response.putInt("height", image.getHeight());
+
+                            WritableArray blocks = Arguments.createArray();
+                            for (Text.TextBlock block : result.getTextBlocks()) {
+                                WritableMap blockObject = Arguments.createMap();
+                                blockObject.putString("text", block.getText());
+                                blockObject.putMap("rect", getRectMap(block.getBoundingBox()));
+
+                               WritableArray lines = Arguments.createArray();
+
+                                for (Text.Line line : block.getLines()) {
+                                    WritableMap lineObject = Arguments.createMap();
+                                    lineObject.putString("text", line.getText());
+                                    lineObject.putMap("rect", getRectMap(line.getBoundingBox()));
+                                    lines.pushMap(lineObject);
                                 }
-                            })
-                            .addOnFailureListener(
-                                    new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            // Task failed with an exception
-                                            // ...
-                                        }
-                                    });
+
+                                blockObject.putArray("lines", lines);
+                                blocks.pushMap(blockObject);
+                            }
+
+                            response.putArray("blocks", blocks);
+
+                            promise.resolve(response);
+                        }
+                    })
+                    .addOnFailureListener(
+                            new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    promise.reject("TextRecognitionModule failed", e);
+                                }
+                            });
         } catch (IOException e) {
             e.printStackTrace();
         }

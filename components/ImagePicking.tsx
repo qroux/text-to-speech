@@ -3,8 +3,17 @@ import { Button, Platform, Image, View, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { recognizeImage } from "./helpers/mlkit";
 
+type LineContent = {
+  text: string;
+};
+
+type Line = {
+  lines: LineContent[];
+};
+
 const ImagePicking = () => {
   const [img, setImg] = useState<any>(null);
+  const [result, setResult] = useState<any>(null);
 
   useEffect(() => {
     (async () => {
@@ -17,6 +26,12 @@ const ImagePicking = () => {
       }
     })();
   }, []);
+
+  const renderLines = () => {
+    const text: string[] = [];
+    result.forEach((line: Line) => text.push(line.lines[0].text));
+    return text.join(" ");
+  };
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -46,8 +61,10 @@ const ImagePicking = () => {
         <Button title="Pick an img" onPress={pickImage} disabled={!!img} />
         <Button
           title="Analyze"
-          onPress={() => {
-            recognizeImage(img);
+          onPress={async () => {
+            const res = await recognizeImage(img);
+            setImg("");
+            setResult(res.blocks);
           }}
           disabled={!img}
           color={"green"}
@@ -59,7 +76,7 @@ const ImagePicking = () => {
           color: "red",
         }}
       >
-        TEST : {JSON.stringify(img)}
+        {result ? renderLines() : null}
       </Text>
 
       {img ? (
