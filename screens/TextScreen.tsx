@@ -1,28 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, ScrollView, Button } from "react-native";
 import * as Speech from "expo-speech";
 
 import { Text, View } from "../components/Themed";
 import { ImagePicking } from "../components/ImagePicking";
+import { recognizeImage } from "../components/helpers/mlkit";
+
+type LineContent = {
+  text: string;
+};
+
+type Line = {
+  lines: LineContent[];
+};
 
 export default function TextScreen() {
+  const [result, setResult] = useState<any>([]);
+
+  const concatLines = () => {
+    const text: string[] = [];
+    result.forEach((line: Line) => text.push(line.lines[0].text));
+    return text.join(" ");
+  };
+
   const renderWords = () => {
-    const text = "Water Tell me not";
-    return text.split(" ").map((word) => {
-      return (
-        <Text
-          style={{
-            fontSize: 18,
-            paddingRight: 10,
-            paddingBottom: 15,
-          }}
-          key={word + Math.random()}
-          onPress={() => speak(word)}
-        >
-          {word}{" "}
-        </Text>
-      );
-    });
+    return concatLines()
+      .split(" ")
+      .map((word) => {
+        return (
+          <Text
+            style={{
+              fontSize: 18,
+              paddingRight: 10,
+              paddingBottom: 15,
+            }}
+            key={word + Math.random()}
+            onPress={() => speak(word)}
+          >
+            {word}{" "}
+          </Text>
+        );
+      });
   };
 
   const speak = (word: any) => {
@@ -32,9 +50,12 @@ export default function TextScreen() {
 
   return (
     <ScrollView>
-      <View style={styles.container}>{renderWords()}</View>
+      <View style={styles.container}>
+        {renderWords()}
+        {/* <Text>{concatLines()}</Text> */}
+      </View>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ImagePicking />
+        <ImagePicking recognizeImage={recognizeImage} setResult={setResult} />
       </View>
     </ScrollView>
   );

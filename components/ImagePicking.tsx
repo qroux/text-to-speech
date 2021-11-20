@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Button, Platform, Image, View, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { recognizeImage } from "./helpers/mlkit";
 
-type LineContent = {
-  text: string;
-};
-
-type Line = {
-  lines: LineContent[];
-};
-
-const ImagePicking = () => {
+const ImagePicking = ({
+  setResult,
+  recognizeImage,
+}: {
+  setResult: React.Dispatch<any>;
+  recognizeImage: (url: string) => void;
+}) => {
   const [img, setImg] = useState<any>(null);
-  const [result, setResult] = useState<any>(null);
 
   useEffect(() => {
     (async () => {
@@ -26,12 +22,6 @@ const ImagePicking = () => {
       }
     })();
   }, []);
-
-  const renderLines = () => {
-    const text: string[] = [];
-    result.forEach((line: Line) => text.push(line.lines[0].text));
-    return text.join(" ");
-  };
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -62,7 +52,7 @@ const ImagePicking = () => {
         <Button
           title="Analyze"
           onPress={async () => {
-            const res = await recognizeImage(img);
+            const res: any = await recognizeImage(img);
             setImg("");
             setResult(res.blocks);
           }}
@@ -70,14 +60,6 @@ const ImagePicking = () => {
           color={"green"}
         />
       </View>
-
-      <Text
-        style={{
-          color: "red",
-        }}
-      >
-        {result ? renderLines() : null}
-      </Text>
 
       {img ? (
         <Image
