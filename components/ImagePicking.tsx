@@ -4,8 +4,10 @@ import * as ImagePicker from "expo-image-picker";
 
 const ImagePicking = ({
   setResult,
+  setError,
   recognizeImage,
 }: {
+  setError: React.Dispatch<any>;
   setResult: React.Dispatch<any>;
   recognizeImage: (url: string) => void;
 }) => {
@@ -52,9 +54,14 @@ const ImagePicking = ({
         <Button
           title="Analyze"
           onPress={async () => {
-            const res: any = await recognizeImage(img);
+            try {
+              const res: any = await recognizeImage(img);
+              setResult(res.blocks);
+            } catch (err) {
+              setError(err);
+            }
+
             setImg("");
-            setResult(res.blocks);
           }}
           disabled={!img}
           color={"green"}

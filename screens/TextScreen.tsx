@@ -16,6 +16,7 @@ type Line = {
 
 export default function TextScreen() {
   const [result, setResult] = useState<any>([]);
+  const [error, setError] = useState<any>("");
 
   const concatLines = () => {
     const text: string[] = [];
@@ -55,7 +56,12 @@ export default function TextScreen() {
         {/* <Text>{concatLines()}</Text> */}
       </View>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ImagePicking recognizeImage={recognizeImage} setResult={setResult} />
+        <ImagePicking
+          recognizeImage={recognizeImage}
+          setResult={setResult}
+          setError={setError}
+        />
+        <Text>error: {error}</Text>
       </View>
     </ScrollView>
   );
