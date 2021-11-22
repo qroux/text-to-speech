@@ -12,7 +12,7 @@ type BlockContent = {
 
 type Blocks = BlockContent[];
 
-export default function TextScreen() {
+export default function PracticeScreen() {
   const [result, setResult] = useState<Blocks>([]);
   const [error, setError] = useState<any>("");
 

@@ -5,7 +5,7 @@ import i18n from "i18n-js";
 
 import { Text, View } from "../components/Themed";
 
-export default function ProgressScreen() {
+export default function DashboardScreen() {
   // Set the key-value pairs for the different languages you want to support.
   i18n.translations = {
     en: { title: "Progress Dashboard Lang: ENG" },

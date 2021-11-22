@@ -2,34 +2,34 @@
  * Learn more about createBottomTabNavigator:
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   createStackNavigator,
   CardStyleInterpolators,
-} from '@react-navigation/stack';
-import * as React from 'react';
+} from "@react-navigation/stack";
+import * as React from "react";
 
 // SCREENS
-import ProgressScreen from '../screens/ProgressScreen';
-import TextScreen from '../screens/TextScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import DashboardScreen from "../screens/DashboardScreen";
+import PracticeScreen from "../screens/PracticeScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 import {
   BottomTabParamList,
   ProgressParamList,
   TextParamList,
   SettingsParamList,
-} from '../types';
+} from "../types";
 
 // STYLING
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
+import Colors from "../constants/Colors";
+import useColorScheme from "../hooks/useColorScheme";
 import {
   Ionicons,
   MaterialCommunityIcons,
   MaterialIcons,
   AntDesign,
-} from '@expo/vector-icons';
+} from "@expo/vector-icons";
 
 const BottomTab = createMaterialTopTabNavigator<BottomTabParamList>();
 
@@ -38,40 +38,41 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName='Progress'
-      tabBarPosition='bottom'
+      initialRouteName="Progress"
+      tabBarPosition="bottom"
       tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
         showIcon: true,
         showLabel: false,
-      }}>
+      }}
+    >
       <BottomTab.Screen
-        name='Progress'
+        name="Progress"
         component={ProgressNavigator}
         options={{
-          tabBarLabel: 'Progress',
+          tabBarLabel: "Progress",
           tabBarIcon: ({ color }) => (
-            <AntDesignTabBarIcon name='barschart' color={color} />
+            <AntDesignTabBarIcon name="barschart" color={color} />
           ),
         }}
       />
       <BottomTab.Screen
-        name='Text'
+        name="Text"
         component={TextNavigator}
         options={{
-          tabBarLabel: 'Practice',
+          tabBarLabel: "Practice",
           tabBarIcon: ({ color }) => (
-            <CommunityTabBarIcon name='text-to-speech' color={color} />
+            <CommunityTabBarIcon name="text-to-speech" color={color} />
           ),
         }}
       />
       <BottomTab.Screen
-        name='Settings'
+        name="Settings"
         component={SettingsNavigator}
         options={{
-          tabBarLabel: 'Settings',
+          tabBarLabel: "Settings",
           tabBarIcon: ({ color }) => (
-            <IoniconsTabBarIcon name='ios-settings-outline' color={color} />
+            <IoniconsTabBarIcon name="ios-settings-outline" color={color} />
           ),
         }}
       />
@@ -82,14 +83,14 @@ export default function BottomTabNavigator() {
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
 function IoniconsTabBarIcon(props: {
-  name: React.ComponentProps<typeof Ionicons>['name'];
+  name: React.ComponentProps<typeof Ionicons>["name"];
   color: string;
 }) {
   return <Ionicons size={24} style={{ marginBottom: -3 }} {...props} />;
 }
 
 function CommunityTabBarIcon(props: {
-  name: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
+  name: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
   color: string;
 }) {
   return (
@@ -98,14 +99,14 @@ function CommunityTabBarIcon(props: {
 }
 
 function MaterialTabBarIcon(props: {
-  name: React.ComponentProps<typeof MaterialIcons>['name'];
+  name: React.ComponentProps<typeof MaterialIcons>["name"];
   color: string;
 }) {
   return <MaterialIcons size={24} style={{ marginBottom: -3 }} {...props} />;
 }
 
 function AntDesignTabBarIcon(props: {
-  name: React.ComponentProps<typeof AntDesign>['name'];
+  name: React.ComponentProps<typeof AntDesign>["name"];
   color: string;
 }) {
   return <AntDesign size={24} style={{ marginBottom: -3 }} {...props} />;
@@ -119,9 +120,9 @@ function ProgressNavigator() {
   return (
     <ProgressStack.Navigator>
       <ProgressStack.Screen
-        name='ProgressScreen'
-        component={ProgressScreen}
-        options={{ headerTitle: 'Dashboard' }}
+        name="DashboardScreen"
+        component={DashboardScreen}
+        options={{ headerTitle: "Dashboard" }}
       />
     </ProgressStack.Navigator>
   );
@@ -133,9 +134,9 @@ function TextNavigator() {
   return (
     <TextStack.Navigator>
       <TextStack.Screen
-        name='TextScreen'
-        component={TextScreen}
-        options={{ headerTitle: 'Practice' }}
+        name="PracticeScreen"
+        component={PracticeScreen}
+        options={{ headerTitle: "Practice" }}
       />
     </TextStack.Navigator>
   );
@@ -147,9 +148,9 @@ function SettingsNavigator() {
   return (
     <SettingsStack.Navigator>
       <SettingsStack.Screen
-        name='Settings'
+        name="Settings"
         component={SettingsScreen}
-        options={{ headerTitle: 'Settings' }}
+        options={{ headerTitle: "Settings" }}
       />
     </SettingsStack.Navigator>
   );
