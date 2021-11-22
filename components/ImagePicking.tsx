@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button, Platform, Image, View } from "react-native";
+import { Platform, Image, View } from "react-native";
+import { Button } from "react-native-elements";
 import * as ImagePicker from "expo-image-picker";
+import Colors from "../constants/Colors";
 
 const ImagePicking = ({
   setResult,
@@ -48,7 +50,15 @@ const ImagePicking = ({
           marginBottom: 20,
         }}
       >
-        <Button title="Select Image" onPress={pickImage} color={"dimgray"} />
+        <Button
+          title="Select Image"
+          onPress={pickImage}
+          buttonStyle={{
+            backgroundColor: !img
+              ? Colors.light.buttons.secondary.active
+              : Colors.light.buttons.secondary.passiv,
+          }}
+        />
         <Button
           title="Extract Text"
           onPress={async () => {
@@ -63,7 +73,12 @@ const ImagePicking = ({
             setImg("");
           }}
           disabled={!img}
-          color={"deepskyblue"}
+          type={!img ? "outline" : "solid"}
+          buttonStyle={{
+            backgroundColor: !img
+              ? "transparent"
+              : Colors.light.buttons.primary.active,
+          }}
         />
       </View>
 
