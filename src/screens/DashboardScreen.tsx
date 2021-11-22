@@ -4,10 +4,12 @@ import * as Localization from "expo-localization";
 import i18n from "i18n-js";
 
 import { Text, View } from "../components/Themed";
-import { Context as DashboardContext } from "../context/dashboardContext";
+import { Context as AppContext } from "../context/AppContext";
 
 export default function DashboardScreen() {
-  const { state } = useContext(DashboardContext);
+  const {
+    state: { words },
+  } = useContext(AppContext);
   // Set the key-value pairs for the different languages you want to support.
   i18n.translations = {
     en: { title: "Progress Dashboard Lang: ENG" },
@@ -25,6 +27,7 @@ export default function DashboardScreen() {
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
+      <Text>{JSON.stringify(words)}</Text>
     </View>
   );
 }

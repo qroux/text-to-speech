@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import * as Speech from "expo-speech";
+
+import { Context as AppContext } from "../context/AppContext";
 
 import { Text, View } from "../components/Themed";
 import { ImagePicking } from "../components/ImagePicking";
 import { recognizeImage } from "../components/helpers/mlkit";
+import { Button } from "react-native-elements";
 
 type BlockContent = {
   text: string;
@@ -13,6 +16,10 @@ type BlockContent = {
 type Blocks = BlockContent[];
 
 export default function PracticeScreen() {
+  const {
+    state: { words },
+    actions: { toggleLang, incrementWordCount },
+  } = useContext(AppContext);
   const [result, setResult] = useState<Blocks>([]);
   const [error, setError] = useState<any>("");
 
@@ -22,6 +29,11 @@ export default function PracticeScreen() {
     );
 
     return humanizedBlocks.join(" ");
+  };
+
+  const speak = (word: any) => {
+    Speech.VoiceQuality.Enhanced;
+    Speech.speak(word, { language: "en-USA", rate: 0.7 });
   };
 
   const renderWords = () => {
@@ -36,7 +48,10 @@ export default function PracticeScreen() {
               paddingBottom: 15,
             }}
             key={word + Math.random()}
-            onPress={() => speak(word)}
+            onPress={() => {
+              speak(word);
+              incrementWordCount(word);
+            }}
           >
             {word}{" "}
           </Text>
@@ -44,13 +59,14 @@ export default function PracticeScreen() {
       });
   };
 
-  const speak = (word: any) => {
-    Speech.VoiceQuality.Enhanced;
-    Speech.speak(word, { language: "en-USA", rate: 0.7 });
-  };
-
   return (
     <ScrollView>
+      {/* <Button
+        title={words.real.toString()}
+        onPress={() => {
+          incrementWordCount();
+        }}
+      /> */}
       <View style={styles.container}>{renderWords()}</View>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <ImagePicking

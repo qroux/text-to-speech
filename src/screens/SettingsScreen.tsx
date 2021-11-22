@@ -16,7 +16,7 @@ export default function SettingsScreen() {
         darkColor="rgba(255,255,255,0.1)"
       />
       <Button
-        title="link to settings"
+        title="vocal synth settings"
         onPress={() =>
           IntentLauncher.startActivityAsync(
             IntentLauncher.ActivityAction.ACCESSIBILITY_SETTINGS

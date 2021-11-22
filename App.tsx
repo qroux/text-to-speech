@@ -8,7 +8,7 @@ import useColorScheme from "./src/hooks/useColorScheme";
 import Navigation from "./src/navigation";
 
 // CONTEXT
-import { Provider as DashboardProvider } from "./src/context/dashboardContext";
+import { Provider as AppProvider } from "./src/context/AppContext";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -18,12 +18,12 @@ export default function App() {
     return null;
   } else {
     return (
-      <DashboardProvider>
+      <AppProvider>
         <SafeAreaProvider>
           <Navigation colorScheme={colorScheme} />
           <StatusBar />
         </SafeAreaProvider>
-      </DashboardProvider>
+      </AppProvider>
     );
   }
 }

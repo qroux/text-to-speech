@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useReducer, useState } from "react";
+import React, { createContext, ReactNode, useReducer } from "react";
 
 interface AppStates {
   [key: string]: any;
@@ -19,16 +19,11 @@ type AppContext = {
   actions: Actions;
 };
 
-export const createDataContext = ({
-  reducer,
-  actions,
-  initialState,
-}: CreateContext) => {
+export default ({ reducer, actions, initialState }: CreateContext) => {
   const Context = createContext({} as AppContext);
 
   const Provider = ({ children }: { children: ReactNode }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
-
     const boundActions: Actions = {};
 
     for (let key in actions) {
