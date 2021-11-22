@@ -18,7 +18,9 @@ export default function SettingsScreen() {
       <Button
         title="link to settings"
         onPress={() =>
-          IntentLauncher.startActivityAsync(IntentLauncher.ACTION_SETTINGS)
+          IntentLauncher.startActivityAsync(
+            IntentLauncher.ActivityAction.ACCESSIBILITY_SETTINGS
+          )
         }
         buttonStyle={{
           backgroundColor: Colors.light.buttons.primary.active,
