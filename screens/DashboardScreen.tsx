@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, Button, ScrollView, Linking } from "react-native";
+import { StyleSheet } from "react-native";
 import * as Localization from "expo-localization";
 import i18n from "i18n-js";
 
