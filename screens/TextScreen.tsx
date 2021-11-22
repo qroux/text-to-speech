@@ -6,28 +6,28 @@ import { Text, View } from "../components/Themed";
 import { ImagePicking } from "../components/ImagePicking";
 import { recognizeImage } from "../components/helpers/mlkit";
 
-type LineContent = {
+type BlockContent = {
   text: string;
 };
 
-type Line = {
-  lines: LineContent[];
-};
+type Blocks = BlockContent[];
 
 export default function TextScreen() {
-  const [result, setResult] = useState<any>([]);
+  const [result, setResult] = useState<Blocks>([]);
   const [error, setError] = useState<any>("");
 
-  const concatLines = () => {
-    const text: string[] = [];
-    result.forEach((line: Line) => text.push(line.lines[0].text));
-    return text.join(" ");
+  const concatTextBlocks = () => {
+    const humanizedBlocks = result.map((block: BlockContent) =>
+      block.text.replace(/(\r\n|\n|\r)/gm, " ")
+    );
+
+    return humanizedBlocks.join(" ");
   };
 
   const renderWords = () => {
-    return concatLines()
+    return concatTextBlocks()
       .split(" ")
-      .map((word) => {
+      .map((word: string) => {
         return (
           <Text
             style={{
@@ -53,7 +53,13 @@ export default function TextScreen() {
     <ScrollView>
       <View style={styles.container}>
         {renderWords()}
-        {/* <Text>{concatLines()}</Text> */}
+        <Text>
+          {JSON.stringify(
+            result.map((block: BlockContent) =>
+              block.text.replace(/(\r\n|\n|\r)/gm, " ")
+            )
+          )}
+        </Text>
       </View>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <ImagePicking
@@ -61,7 +67,7 @@ export default function TextScreen() {
           setResult={setResult}
           setError={setError}
         />
-        <Text>error: {error}</Text>
+        <Text>error: {JSON.stringify(error)}</Text>
       </View>
     </ScrollView>
   );

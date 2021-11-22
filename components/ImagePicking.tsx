@@ -54,8 +54,9 @@ const ImagePicking = ({
         <Button
           title="Analyze"
           onPress={async () => {
+            let res: any;
             try {
-              const res: any = await recognizeImage(img);
+              res = await recognizeImage(img);
               setResult(res.blocks);
             } catch (err) {
               setError(err);

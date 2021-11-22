@@ -60,25 +60,11 @@ public class TextRecognitionModule extends ReactContextBaseJavaModule {
                         @Override
                         public void onSuccess(Text result) {
                             WritableMap response = Arguments.createMap();
-                            response.putInt("width", image.getWidth());
-                            response.putInt("height", image.getHeight());
 
                             WritableArray blocks = Arguments.createArray();
                             for (Text.TextBlock block : result.getTextBlocks()) {
                                 WritableMap blockObject = Arguments.createMap();
                                 blockObject.putString("text", block.getText());
-                                blockObject.putMap("rect", getRectMap(block.getBoundingBox()));
-
-                               WritableArray lines = Arguments.createArray();
-
-                                for (Text.Line line : block.getLines()) {
-                                    WritableMap lineObject = Arguments.createMap();
-                                    lineObject.putString("text", line.getText());
-                                    lineObject.putMap("rect", getRectMap(line.getBoundingBox()));
-                                    lines.pushMap(lineObject);
-                                }
-
-                                blockObject.putArray("lines", lines);
                                 blocks.pushMap(blockObject);
                             }
 
