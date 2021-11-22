@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Platform, Image, View, Text } from "react-native";
+import { Button, Platform, Image, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 
 const ImagePicking = ({
@@ -50,9 +50,9 @@ const ImagePicking = ({
           marginBottom: 20,
         }}
       >
-        <Button title="Pick an img" onPress={pickImage} disabled={!!img} />
+        <Button title="Select Image" onPress={pickImage} color={"dimgray"} />
         <Button
-          title="Analyze"
+          title="Extract Text"
           onPress={async () => {
             let res: any;
             try {
@@ -65,7 +65,7 @@ const ImagePicking = ({
             setImg("");
           }}
           disabled={!img}
-          color={"green"}
+          color={"deepskyblue"}
         />
       </View>
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, ScrollView, Button } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import * as Speech from "expo-speech";
 
 import { Text, View } from "../components/Themed";
@@ -51,23 +51,13 @@ export default function TextScreen() {
 
   return (
     <ScrollView>
-      <View style={styles.container}>
-        {renderWords()}
-        <Text>
-          {JSON.stringify(
-            result.map((block: BlockContent) =>
-              block.text.replace(/(\r\n|\n|\r)/gm, " ")
-            )
-          )}
-        </Text>
-      </View>
+      <View style={styles.container}>{renderWords()}</View>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <ImagePicking
           recognizeImage={recognizeImage}
           setResult={setResult}
           setError={setError}
         />
-        <Text>error: {JSON.stringify(error)}</Text>
       </View>
     </ScrollView>
   );
