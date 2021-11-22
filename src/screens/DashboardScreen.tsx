@@ -1,11 +1,13 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
 import * as Localization from "expo-localization";
 import i18n from "i18n-js";
 
 import { Text, View } from "../components/Themed";
+import { Context as DashboardContext } from "../context/dashboardContext";
 
 export default function DashboardScreen() {
+  const { state } = useContext(DashboardContext);
   // Set the key-value pairs for the different languages you want to support.
   i18n.translations = {
     en: { title: "Progress Dashboard Lang: ENG" },
