@@ -16,14 +16,14 @@ export default function SettingsScreen() {
         darkColor="rgba(255,255,255,0.1)"
       />
       <Button
-        title="vocal synth settings"
+        title={"Vocal Synth Settings"}
         onPress={() =>
           IntentLauncher.startActivityAsync(
             IntentLauncher.ActivityAction.ACCESSIBILITY_SETTINGS
           )
         }
         buttonStyle={{
-          backgroundColor: Colors.light.buttons.primary.active,
+          backgroundColor: Colors.light.buttons.primary.main,
         }}
       />
     </View>
