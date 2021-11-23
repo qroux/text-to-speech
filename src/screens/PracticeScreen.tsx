@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import * as Speech from "expo-speech";
 
@@ -7,7 +7,6 @@ import { Context as AppContext } from "../context/AppContext";
 import { Text, View } from "../components/Themed";
 import { ImagePicking } from "../components/ImagePicking";
 import { recognizeImage } from "../components/helpers/mlkit";
-import { Button } from "react-native-elements";
 
 type BlockContent = {
   text: string;
@@ -17,8 +16,7 @@ type Blocks = BlockContent[];
 
 export default function PracticeScreen() {
   const {
-    state: { words },
-    actions: { toggleLang, incrementWordCount },
+    actions: { incrementWordCount },
   } = useContext(AppContext);
   const [result, setResult] = useState<Blocks>([]);
   const [error, setError] = useState<any>("");
@@ -27,7 +25,6 @@ export default function PracticeScreen() {
     const humanizedBlocks = result.map((block: BlockContent) =>
       block.text.replace(/(\r\n|\n|\r)/gm, " ")
     );
-
     return humanizedBlocks.join(" ");
   };
 
@@ -42,11 +39,7 @@ export default function PracticeScreen() {
       .map((word: string) => {
         return (
           <Text
-            style={{
-              fontSize: 18,
-              paddingRight: 10,
-              paddingBottom: 15,
-            }}
+            style={styles.words}
             key={word + Math.random()}
             onPress={() => {
               speak(word);
@@ -60,30 +53,32 @@ export default function PracticeScreen() {
   };
 
   return (
-    <ScrollView>
-      {/* <Button
-        title={words.real.toString()}
-        onPress={() => {
-          incrementWordCount();
-        }}
-      /> */}
-      <View style={styles.container}>{renderWords()}</View>
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ImagePicking
-          recognizeImage={recognizeImage}
-          setResult={setResult}
-          setError={setError}
-        />
-      </View>
-    </ScrollView>
+    <View
+      style={{
+        flex: 1,
+      }}
+    >
+      <ImagePicking
+        recognizeImage={recognizeImage}
+        setResult={setResult}
+        setError={setError}
+      />
+
+      <ScrollView style={styles.scrollView}>
+        {error ? <Text>{error}</Text> : null}
+        <View style={styles.container}>{renderWords()}</View>
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollView: {},
   container: {
     flexDirection: "row",
     flexWrap: "wrap",
     padding: 15,
+    flex: 1,
   },
   title: {
     fontSize: 20,
@@ -93,5 +88,10 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: "80%",
+  },
+  words: {
+    fontSize: 18,
+    paddingRight: 10,
+    paddingBottom: 15,
   },
 });

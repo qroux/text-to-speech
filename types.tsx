@@ -9,19 +9,19 @@ export type RootStackParamList = {
 };
 
 export type BottomTabParamList = {
-  Progress: undefined;
-  Text: undefined;
+  Dashboard: undefined;
+  Practice: undefined;
   Settings: undefined;
 };
 
-export type ProgressParamList = {
-  ProgressScreen: undefined;
+export type DashboardParamList = {
+  DashboardScreen: undefined;
 };
 
-export type TextParamList = {
-  TextScreen: undefined;
+export type PracticeParamList = {
+  PracticeScreen: undefined;
 };
 
 export type SettingsParamList = {
-  Settings: undefined;
+  SettingsScreen: undefined;
 };

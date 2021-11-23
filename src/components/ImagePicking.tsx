@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Platform, Image, View } from "react-native";
-import { Button } from "react-native-elements";
+import { Platform, Image, View, StyleSheet } from "react-native";
+import { Button, FAB } from "react-native-elements";
 import * as ImagePicker from "expo-image-picker";
 import Colors from "../constants/Colors";
+import { Entypo, AntDesign, FontAwesome } from "@expo/vector-icons";
+import { Response } from "./helpers/mlkit";
+import CustomFab from "./CustomFab";
+import ImagePreview from "./ImagePreview";
+import { useNavigation } from "@react-navigation/native";
 
 const ImagePicking = ({
   setResult,
@@ -11,9 +16,24 @@ const ImagePicking = ({
 }: {
   setError: React.Dispatch<any>;
   setResult: React.Dispatch<any>;
-  recognizeImage: (url: string) => void;
+  recognizeImage: (url: string) => Promise<Response>;
 }) => {
   const [img, setImg] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <CustomFab
+          img={img}
+          loading={loading}
+          firstAction={pickImage}
+          secondAction={processImage}
+        />
+      ),
+    });
+  }, [img, loading]);
 
   useEffect(() => {
     (async () => {
@@ -28,68 +48,48 @@ const ImagePicking = ({
   }, []);
 
   const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
-
       quality: 1,
     });
 
-    if (!result.cancelled) {
-      setImg(result.uri);
+    if (!result.cancelled) setImg(result.uri);
+  };
+
+  const processImage = async () => {
+    setLoading(true);
+    try {
+      const res = await recognizeImage(img);
+      setResult(res.blocks);
+    } catch (err) {
+      setError(err);
     }
+
+    setImg("");
+    setLoading(false);
   };
 
   return (
-    <View>
+    <View style={styles.mainContainer}>
       <View
         style={{
           display: "flex",
-          width: "70%",
+          width: "100%",
           flexDirection: "row",
-          justifyContent: "space-around",
-          marginBottom: 20,
+          justifyContent: "center",
         }}
       >
-        <Button
-          title="Select Image"
-          onPress={pickImage}
-          buttonStyle={{
-            backgroundColor: !img
-              ? Colors.light.buttons.secondary.active
-              : Colors.light.buttons.secondary.passiv,
-          }}
-        />
-        <Button
-          title="Extract Text"
-          onPress={async () => {
-            let res: any;
-            try {
-              res = await recognizeImage(img);
-              setResult(res.blocks);
-            } catch (err) {
-              setError(err);
-            }
-
-            setImg("");
-          }}
-          disabled={!img}
-          type={!img ? "outline" : "solid"}
-          buttonStyle={{
-            backgroundColor: !img
-              ? "transparent"
-              : Colors.light.buttons.primary.active,
-          }}
-        />
+        <ImagePreview img={img} />
       </View>
-
-      {img ? (
-        <Image
-          source={{ uri: img }}
-          style={{ width: 300, height: 400, resizeMode: "cover" }}
-        />
-      ) : null}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    width: "100%",
+    position: "relative",
+  },
+});
 
 export { ImagePicking };

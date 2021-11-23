@@ -5,7 +5,7 @@ interface AppStates {
 }
 
 interface Actions {
-  [key: string]: () => void;
+  [key: string]: (param?: any) => void;
 }
 
 interface CreateContext {

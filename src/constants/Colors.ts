@@ -10,8 +10,9 @@ export default {
     tabIconSelected: tintColorLight,
     buttons: {
       primary: {
-        active: "dodgerblue",
-        passiv: "dodgerblue",
+        main: "#2f95dc",
+        active: "#60E660",
+        passiv: "#2f95dc",
       },
       secondary: {
         active: "dimgrey",
@@ -27,8 +28,8 @@ export default {
     tabIconSelected: tintColorDark,
     buttons: {
       primary: {
-        active: "dodgerblue",
-        passiv: "dodgerblue",
+        active: "#2f95dc",
+        passiv: "#2f95dc",
       },
       secondary: {
         active: "dimgrey",

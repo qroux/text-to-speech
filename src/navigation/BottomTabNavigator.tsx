@@ -16,10 +16,10 @@ import PracticeScreen from "../screens/PracticeScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import {
   BottomTabParamList,
-  ProgressParamList,
-  TextParamList,
+  PracticeParamList,
   SettingsParamList,
-} from "../types";
+  DashboardParamList,
+} from "../../types";
 
 // STYLING
 import Colors from "../constants/Colors";
@@ -30,6 +30,7 @@ import {
   MaterialIcons,
   AntDesign,
 } from "@expo/vector-icons";
+import { Button } from "react-native-elements";
 
 const BottomTab = createMaterialTopTabNavigator<BottomTabParamList>();
 
@@ -38,7 +39,7 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Progress"
+      initialRouteName="Dashboard"
       tabBarPosition="bottom"
       tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
@@ -47,18 +48,18 @@ export default function BottomTabNavigator() {
       }}
     >
       <BottomTab.Screen
-        name="Progress"
-        component={ProgressNavigator}
+        name="Dashboard"
+        component={DashboardNavigator}
         options={{
-          tabBarLabel: "Progress",
+          tabBarLabel: "Dashboard",
           tabBarIcon: ({ color }) => (
             <AntDesignTabBarIcon name="barschart" color={color} />
           ),
         }}
       />
       <BottomTab.Screen
-        name="Text"
-        component={TextNavigator}
+        name="Practice"
+        component={PracticeNavigator}
         options={{
           tabBarLabel: "Practice",
           tabBarIcon: ({ color }) => (
@@ -98,13 +99,6 @@ function CommunityTabBarIcon(props: {
   );
 }
 
-function MaterialTabBarIcon(props: {
-  name: React.ComponentProps<typeof MaterialIcons>["name"];
-  color: string;
-}) {
-  return <MaterialIcons size={24} style={{ marginBottom: -3 }} {...props} />;
-}
-
 function AntDesignTabBarIcon(props: {
   name: React.ComponentProps<typeof AntDesign>["name"];
   color: string;
@@ -114,31 +108,43 @@ function AntDesignTabBarIcon(props: {
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const ProgressStack = createStackNavigator<ProgressParamList>();
+const DashboardStack = createStackNavigator<DashboardParamList>();
 
-function ProgressNavigator() {
+function DashboardNavigator() {
   return (
-    <ProgressStack.Navigator>
-      <ProgressStack.Screen
+    <DashboardStack.Navigator>
+      <DashboardStack.Screen
         name="DashboardScreen"
         component={DashboardScreen}
         options={{ headerTitle: "Dashboard" }}
       />
-    </ProgressStack.Navigator>
+    </DashboardStack.Navigator>
   );
 }
 
-const TextStack = createStackNavigator<TextParamList>();
+const PracticeStack = createStackNavigator<PracticeParamList>();
 
-function TextNavigator() {
+function PracticeNavigator() {
   return (
-    <TextStack.Navigator>
-      <TextStack.Screen
+    <PracticeStack.Navigator>
+      <PracticeStack.Screen
         name="PracticeScreen"
         component={PracticeScreen}
-        options={{ headerTitle: "Practice" }}
+        options={{
+          headerTitle: "Practice",
+          // headerRight: () => (
+          //   <Button
+          //     onPress={() => alert("This is a button!")}
+          //     title=" + "
+          //     type="solid"
+          //     buttonStyle={{
+          //       marginRight: 15,
+          //     }}
+          //   />
+          // ),
+        }}
       />
-    </TextStack.Navigator>
+    </PracticeStack.Navigator>
   );
 }
 
@@ -148,7 +154,7 @@ function SettingsNavigator() {
   return (
     <SettingsStack.Navigator>
       <SettingsStack.Screen
-        name="Settings"
+        name="SettingsScreen"
         component={SettingsScreen}
         options={{ headerTitle: "Settings" }}
       />

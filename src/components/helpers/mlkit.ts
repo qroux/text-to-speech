@@ -14,16 +14,14 @@ type Line = {
   rect: Rect;
 };
 
-type block = {
+type Block = {
   text: string;
   rect: Rect;
   lines: Line[];
 };
 
-export type response = {
-  width: number;
-  height: number;
-  blocks: block[];
+export type Response = {
+  blocks: Block[];
 };
 
 export const recognizeImage = (url: string): Promise<Response> => {
