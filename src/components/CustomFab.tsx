@@ -1,7 +1,7 @@
 import { AntDesign, Entypo, FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { FAB } from "react-native-elements";
+import { Button, FAB } from "react-native-elements";
 import Colors from "../constants/Colors";
 
 type FabProps = {
@@ -13,7 +13,7 @@ type FabProps = {
 
 const CustomFab = ({ img, loading, firstAction, secondAction }: FabProps) => {
   return (
-    <FAB
+    <Button
       title={
         img ? (
           <AntDesign name="sound" size={24} color="white" />
@@ -23,12 +23,12 @@ const CustomFab = ({ img, loading, firstAction, secondAction }: FabProps) => {
       }
       onPress={img ? secondAction : firstAction}
       loading={loading}
-      style={styles.fab}
-      color={
-        img
+      buttonStyle={{
+        ...styles.fab,
+        backgroundColor: img
           ? Colors.light.buttons.primary.active
-          : Colors.light.buttons.primary.main
-      }
+          : Colors.light.buttons.primary.main,
+      }}
     />
   );
 };
@@ -37,9 +37,8 @@ export default CustomFab;
 
 const styles = StyleSheet.create({
   fab: {
-    position: "absolute",
-    top: 10,
-    right: 20,
-    zIndex: 10,
+    marginRight: 20,
+    borderRadius: 50,
+    width: 50,
   },
 });
