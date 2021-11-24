@@ -6,6 +6,8 @@ import i18n from "i18n-js";
 import { Text, View } from "../components/Themed";
 import { Context as AppContext } from "../context/AppContext";
 import Section from "../components/DashboardScreen/Section";
+import Item from "../components/DashboardScreen/Item";
+import VocabularyList from "../components/DashboardScreen/VocabularySection";
 
 export default function DashboardScreen() {
   const {
@@ -22,7 +24,12 @@ export default function DashboardScreen() {
 
   return (
     <View style={styles.container}>
-      <Section title="Overall Progress" />
+      <Section title="Overall Progress">
+        <Item label="Clicks" value={0} />
+        <Item label="Vocabulary" value={0} unit={"words"} />
+        <Item label="Goal" value={0} unit={"/ 3000 words"} />
+      </Section>
+      <VocabularyList words={words} />
     </View>
   );
 }
