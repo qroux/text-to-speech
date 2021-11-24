@@ -5,6 +5,7 @@ export const sharedStyles = {
     borderWidth: 1,
     minHeight: 200,
     maxHeight: 300,
+    position: "relative",
     width: "100%",
     padding: 5,
     marginBottom: 20,
