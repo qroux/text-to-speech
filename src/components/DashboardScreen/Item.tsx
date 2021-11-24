@@ -14,8 +14,8 @@ const Item = ({
   label,
   value,
   unit,
-  lightColor = "black",
-  darkColor = "white",
+  lightColor = "rgba(0,0,0, 0.1)",
+  darkColor = "rgba(255,255,255, 0.2)",
 }: ItemProps) => {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
   return (
@@ -23,7 +23,7 @@ const Item = ({
       <Text style={styles.label}>{label}</Text>
       <View style={styles.contentContainer}>
         <Text>{value}</Text>
-        <Text>{unit}</Text>
+        <Text style={styles.unit}>{unit}</Text>
       </View>
     </View>
   );
@@ -42,12 +42,15 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   label: {
-    fontWeight: "bold",
+    // fontWeight: "bold",
     fontSize: 18,
   },
   contentContainer: {
     paddingTop: 15,
     justifyContent: "center",
     alignItems: "center",
+  },
+  unit: {
+    fontWeight: "bold",
   },
 });
