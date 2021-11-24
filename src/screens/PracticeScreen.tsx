@@ -5,7 +5,7 @@ import * as Speech from "expo-speech";
 import { Context as AppContext } from "../context/AppContext";
 
 import { Text, View } from "../components/Themed";
-import { ImagePicking } from "../components/ImagePicking";
+import { ImagePicking } from "../components/PracticeScreen/ImagePicking";
 import { recognizeImage } from "../components/helpers/mlkit";
 import { sanitizeString } from "../components/helpers/sanitizeString";
 

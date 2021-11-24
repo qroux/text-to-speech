@@ -5,6 +5,7 @@ import i18n from "i18n-js";
 
 import { Text, View } from "../components/Themed";
 import { Context as AppContext } from "../context/AppContext";
+import Section from "../components/DashboardScreen/Section";
 
 export default function DashboardScreen() {
   const {
@@ -21,13 +22,7 @@ export default function DashboardScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{i18n.t("title")}</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <Text>{JSON.stringify(words)}</Text>
+      <Section title="Overall Progress" />
     </View>
   );
 }
@@ -36,7 +31,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    // borderColor: "blue",
+    // borderWidth: 2,
+    padding: 15,
   },
   title: {
     fontSize: 20,

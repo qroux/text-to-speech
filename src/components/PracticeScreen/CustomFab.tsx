@@ -2,7 +2,7 @@ import { AntDesign, Entypo, FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
 import { StyleSheet } from "react-native";
 import { Button, FAB } from "react-native-elements";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 
 type FabProps = {
   img: any;
