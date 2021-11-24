@@ -12,5 +12,6 @@ export const sharedStyles = {
   sectionTitle: {
     fontWeight: "bold",
     fontSize: 34,
+    paddingBottom: 10,
   },
 };
