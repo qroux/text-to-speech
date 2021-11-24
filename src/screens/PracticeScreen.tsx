@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import * as Speech from "expo-speech";
 
@@ -7,6 +7,7 @@ import { Context as AppContext } from "../context/AppContext";
 import { Text, View } from "../components/Themed";
 import { ImagePicking } from "../components/ImagePicking";
 import { recognizeImage } from "../components/helpers/mlkit";
+import { sanitizeString } from "../components/helpers/sanitizeString";
 
 type BlockContent = {
   text: string;
@@ -43,7 +44,7 @@ export default function PracticeScreen() {
             key={word + Math.random()}
             onPress={() => {
               speak(word);
-              incrementWordCount(word);
+              incrementWordCount(sanitizeString(word));
             }}
           >
             {word}{" "}
