@@ -1,10 +1,13 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
-import * as IntentLauncher from "expo-intent-launcher";
+import IntentLauncher from "expo-intent-launcher";
 
 import { Text, View } from "../components/Themed";
 import Colors from "../constants/Colors";
+import { realmInstance } from "../helpers/realm/realm";
+import userData from "../helpers/realm/data/userData";
+import User from "../helpers/realm/models/User";
 
 export default function SettingsScreen() {
   return (
@@ -24,6 +27,32 @@ export default function SettingsScreen() {
         }
         buttonStyle={{
           backgroundColor: Colors.light.buttons.primary.main,
+        }}
+      />
+      <Button
+        title="realm"
+        onPress={async () => {
+          const instance = await realmInstance;
+          try {
+            const result = await userData(instance).add({
+              username: "Quentin",
+            });
+            console.log("ok", result);
+          } catch (err) {
+            console.error(err);
+          }
+        }}
+      />
+      <Button
+        title="read"
+        onPress={async () => {
+          const instance = await realmInstance;
+          try {
+            const results = await instance.objects("User");
+            console.log(JSON.stringify(results));
+          } catch (err) {
+            console.error(err);
+          }
         }}
       />
     </View>
