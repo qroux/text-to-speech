@@ -6,6 +6,7 @@ export enum Actions {
   error = "ERROR",
   incrementWordCount = "INCREMENT_WORD_COUNT",
   populateWordContext = "POPULATE_WORD_CONTEXT",
+  resetWordContext = "RESET_WORD_CONTEXT",
 }
 
 interface Action {
@@ -41,6 +42,12 @@ const AppReducer = (state: { [key: string]: any }, action: Action) => {
         ...state,
         words: action.payload?.words,
         keys: action.payload?.keys,
+      };
+    case Actions.resetWordContext:
+      return {
+        ...state,
+        words: {},
+        keys: {},
       };
     case Actions.toggleLang:
       return { ...state, lang: state.lang === "fr" ? "en" : "fr", error: null };
@@ -87,12 +94,23 @@ const populateWordContext =
     }
   };
 
+const resetWordContext = (dispatch: (action: Action) => void) => () => {
+  try {
+    dispatch({
+      type: Actions.resetWordContext,
+    });
+  } catch (err) {
+    dispatch({ type: Actions.error });
+  }
+};
+
 export const { Provider, Context } = createDataContext({
   reducer: AppReducer,
   actions: {
     toggleLang,
     incrementWordCount,
     populateWordContext,
+    resetWordContext,
   },
   initialState: {
     lang: "fr",

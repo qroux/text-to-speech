@@ -28,9 +28,9 @@ export default function DashboardScreen() {
 
   useEffect(() => {
     (async () => {
-      const [wordObject, keys] = await fetchStorage();
+      const [wordObject, fetchedKeys] = await fetchStorage();
       // @ts-ignore
-      if (wordObject) populateWordContext(wordObject, keys);
+      if (wordObject) populateWordContext(wordObject, fetchedKeys);
     })();
   }, []);
 
@@ -42,13 +42,6 @@ export default function DashboardScreen() {
         <Item label="Goal" value={0} unit={"/ 3000 words"} />
       </Section>
       <VocabularyList words={words} />
-      <Button
-        title="clear all items"
-        onPress={async () => {
-          const value = await AsyncStorage.getItem("chair");
-          console.log("value =", value);
-        }}
-      />
     </View>
   );
 }
