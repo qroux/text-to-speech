@@ -1,11 +1,12 @@
-import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Divider, Button } from "react-native-elements";
-import { FlatList } from "react-native-gesture-handler";
 import Colors from "../../constants/Colors";
 import { sharedStyles } from "../../constants/Container";
 import { View, Text } from "../Themed";
+import EmptyAnimation from "./EmptyAnimation";
+import WordList from "./WordList";
 
 interface VocabularySectionProps {
   words: string[];
@@ -25,6 +26,10 @@ const VocabularySection = ({ words }: VocabularySectionProps) => {
   };
 
   const list = sortedList();
+
+  const renderList = () => {
+    return list.length > 0 ? <WordList list={list} /> : <EmptyAnimation />;
+  };
 
   return (
     <View style={sharedStyles.sectionContainer}>
@@ -46,23 +51,7 @@ const VocabularySection = ({ words }: VocabularySectionProps) => {
         />
       </View>
 
-      <FlatList
-        data={Object.keys(list)}
-        keyExtractor={(item) => item}
-        renderItem={({ item }) => {
-          return (
-            <View style={styles.itemContainer}>
-              <View style={styles.content}>
-                <Text style={styles.item}>{list[item][0]}</Text>
-                <Text style={{ ...styles.item, paddingRight: 15 }}>
-                  {list[item][1]}
-                </Text>
-              </View>
-              {/* <Divider /> */}
-            </View>
-          );
-        }}
-      />
+      {renderList()}
     </View>
   );
 };
