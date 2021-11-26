@@ -33,8 +33,9 @@ export default Item;
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: "rgba(0,0,0, 0.1)",
-    borderWidth: 1,
+    // borderColor: "rgba(0,0,0, 0.1)",
+    backgroundColor: "rgba(0,0,0, .1)",
+    borderWidth: 0.3,
     borderRadius: 5,
     width: "32%",
     height: "100%",
@@ -49,6 +50,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "transparent",
   },
   unit: {
     fontWeight: "bold",

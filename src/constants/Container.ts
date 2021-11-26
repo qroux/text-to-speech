@@ -13,6 +13,6 @@ export const sharedStyles = {
   sectionTitle: {
     fontWeight: "bold",
     fontSize: 24,
-    paddingBottom: 10,
+    paddingBottom: 15,
   },
 };

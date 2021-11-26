@@ -1,8 +1,9 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Divider, Button } from "react-native-elements";
 import { FlatList } from "react-native-gesture-handler";
+import Colors from "../../constants/Colors";
 import { sharedStyles } from "../../constants/Container";
 import { View, Text } from "../Themed";
 
@@ -31,20 +32,17 @@ const VocabularySection = ({ words }: VocabularySectionProps) => {
         <Text style={sharedStyles.sectionTitle}>Vocabulary</Text>
         <Button
           icon={
-            <MaterialCommunityIcons
-              name={
-                sortingIndex
-                  ? "order-numeric-descending"
-                  : "order-alphabetical-descending"
-              }
-              onPress={() => {
-                setSorting(!sorting);
-              }}
-              size={24}
-              color="white"
+            <FontAwesome
+              name={sortingIndex ? "sort-numeric-desc" : "sort-alpha-asc"}
+              size={28}
+              color={Colors.light.primary}
             />
           }
+          onPress={() => {
+            setSorting(!sorting);
+          }}
           buttonStyle={styles.button}
+          type="clear"
         />
       </View>
 
@@ -56,9 +54,11 @@ const VocabularySection = ({ words }: VocabularySectionProps) => {
             <View style={styles.itemContainer}>
               <View style={styles.content}>
                 <Text style={styles.item}>{list[item][0]}</Text>
-                <Text style={styles.item}>{list[item][1]}</Text>
+                <Text style={{ ...styles.item, paddingRight: 15 }}>
+                  {list[item][1]}
+                </Text>
               </View>
-              <Divider />
+              {/* <Divider /> */}
             </View>
           );
         }}
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
   item: {
     fontSize: 18,
@@ -89,5 +89,7 @@ const styles = StyleSheet.create({
     // flexDirection: "row",
     // justifyContent: "flex-end",
   },
-  button: {},
+  button: {
+    width: 45,
+  },
 });

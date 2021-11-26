@@ -7,7 +7,7 @@ import { Text, View } from "../components/Themed";
 import { Context as AppContext, WordsObject } from "../context/AppContext";
 import Section from "../components/DashboardScreen/Section";
 import Item from "../components/DashboardScreen/Item";
-import VocabularyList from "../components/DashboardScreen/VocabularySection";
+import VocabularySection from "../components/DashboardScreen/VocabularySection";
 import { Button } from "react-native-elements";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchStorage } from "../context/fetchStorage";
@@ -41,7 +41,7 @@ export default function DashboardScreen() {
         <Item label="Vocabulary" value={0} unit={"words"} />
         <Item label="Goal" value={0} unit={"/ 3000 words"} />
       </Section>
-      <VocabularyList words={words} />
+      <VocabularySection words={words} />
     </View>
   );
 }

@@ -1,4 +1,4 @@
-const tintColorLight = "#2f95dc";
+const tintColorLight = "#16CAC7"; // || "#2f95dc";
 const tintColorDark = "#fff";
 
 export default {
@@ -8,17 +8,7 @@ export default {
     tint: tintColorLight,
     tabIconDefault: "#ccc",
     tabIconSelected: tintColorLight,
-    buttons: {
-      primary: {
-        main: "#2f95dc",
-        active: "#60E660",
-        passiv: "#2f95dc",
-      },
-      secondary: {
-        active: "dimgrey",
-        passiv: "darkgray",
-      },
-    },
+    primary: "#16CAC7",
   },
   dark: {
     text: "#fff",
@@ -28,8 +18,8 @@ export default {
     tabIconSelected: tintColorDark,
     buttons: {
       primary: {
-        active: "#2f95dc",
-        passiv: "#2f95dc",
+        active: "#0E7C7B",
+        passiv: "#0E7C7B",
       },
       secondary: {
         active: "dimgrey",

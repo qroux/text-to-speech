@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import { Button } from "react-native-elements";
-import IntentLauncher from "expo-intent-launcher";
+import { Button, Divider } from "react-native-elements";
+import * as IntentLauncher from "expo-intent-launcher";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Text, View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { Context as AppContext } from "../context/AppContext";
+import { sharedStyles } from "../constants/Container";
 
 export default function SettingsScreen() {
   const {
@@ -15,30 +17,35 @@ export default function SettingsScreen() {
   } = useContext(AppContext);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Admin Panel</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <Button
-        title={"Vocal Synth Settings"}
-        onPress={() =>
-          IntentLauncher.startActivityAsync(
-            IntentLauncher.ActivityAction.ACCESSIBILITY_SETTINGS
-          )
-        }
-        buttonStyle={{
-          backgroundColor: Colors.light.buttons.primary.main,
-        }}
-      />
-      <Button
-        title="clear all items"
-        onPress={async () => {
-          await AsyncStorage.multiRemove(keys);
-          resetWordContext();
-        }}
-      />
+      <View style={styles.sectionContainer}>
+        <Text style={sharedStyles.sectionTitle}>Vocal Synthesis</Text>
+        <Button
+          title={"Change Synth Accent"}
+          titleStyle={{ color: Colors.light.primary }}
+          onPress={() =>
+            IntentLauncher.startActivityAsync(
+              IntentLauncher.ActivityAction.ACCESSIBILITY_SETTINGS
+            )
+          }
+          buttonStyle={styles.button}
+          type="clear"
+        />
+      </View>
+      <Divider />
+
+      <View style={styles.sectionContainer}>
+        <Text style={sharedStyles.sectionTitle}>Storage</Text>
+        <Button
+          title="Reset App Memory"
+          titleStyle={{ color: Colors.light.primary }}
+          onPress={async () => {
+            await AsyncStorage.multiRemove(keys);
+            resetWordContext();
+          }}
+          buttonStyle={styles.button}
+          type="clear"
+        />
+      </View>
     </View>
   );
 }
@@ -46,16 +53,20 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    padding: 20,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
+  sectionContainer: {
+    paddingTop: 15,
+    paddingBottom: 15,
   },
   separator: {
     marginVertical: 30,
     height: 1,
     width: "80%",
+  },
+  button: {
+    paddingLeft: 0,
+    marginLeft: 0,
+    width: "50%",
   },
 });
