@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   label: {
-    // fontWeight: "bold",
+    fontWeight: "bold",
     fontSize: 18,
   },
   contentContainer: {

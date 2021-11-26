@@ -4,7 +4,7 @@ export const sharedStyles = {
     borderRadius: 5,
     borderWidth: 1,
     minHeight: 200,
-    maxHeight: 300,
+    maxHeight: 280,
     position: "relative",
     width: "100%",
     padding: 5,
@@ -12,7 +12,7 @@ export const sharedStyles = {
   },
   sectionTitle: {
     fontWeight: "bold",
-    fontSize: 34,
+    fontSize: 24,
     paddingBottom: 10,
   },
 };
