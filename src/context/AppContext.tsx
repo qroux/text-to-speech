@@ -30,6 +30,7 @@ const AppReducer = (state: { [key: string]: any }, action: Action) => {
       AsyncStorage.setItem(word[0], word[1]);
       return {
         ...state,
+        keys: [...state.keys, word[0]],
         words: {
           ...state.words,
           [action?.payload?.content]: state.words[action.payload?.content]
@@ -47,7 +48,7 @@ const AppReducer = (state: { [key: string]: any }, action: Action) => {
       return {
         ...state,
         words: {},
-        keys: {},
+        keys: [],
       };
     case Actions.toggleLang:
       return { ...state, lang: state.lang === "fr" ? "en" : "fr", error: null };

@@ -15,6 +15,7 @@ export default function SettingsScreen() {
     state: { keys },
     actions: { resetWordContext },
   } = useContext(AppContext);
+
   return (
     <View style={styles.container}>
       <View style={styles.sectionContainer}>
@@ -38,6 +39,7 @@ export default function SettingsScreen() {
         <Button
           title="Reset App Memory"
           titleStyle={{ color: Colors.light.primary }}
+          disabled={keys?.length == 0}
           onPress={async () => {
             await AsyncStorage.multiRemove(keys);
             resetWordContext();
