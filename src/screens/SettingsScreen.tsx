@@ -5,7 +5,6 @@ import IntentLauncher from "expo-intent-launcher";
 
 import { Text, View } from "../components/Themed";
 import Colors from "../constants/Colors";
-import RealmDisplay from "../components/RealmDisplay";
 
 export default function SettingsScreen() {
   return (
@@ -27,7 +26,6 @@ export default function SettingsScreen() {
           backgroundColor: Colors.light.buttons.primary.main,
         }}
       />
-      <RealmDisplay />
     </View>
   );
 }
