@@ -8,6 +8,7 @@ import { Text, View } from "../components/Themed";
 import { ImagePicking } from "../components/PracticeScreen/ImagePicking";
 import { recognizeImage } from "../helpers/mlkit";
 import { sanitizeString } from "../helpers/sanitizeString";
+import ArrowAnimation from "../components/PracticeScreen/ArrowAnimation";
 
 type BlockContent = {
   text: string;
@@ -64,6 +65,8 @@ export default function PracticeScreen() {
         setResult={setResult}
         setError={setError}
       />
+
+      <ArrowAnimation />
 
       <ScrollView style={styles.scrollView}>
         {error ? <Text>{error}</Text> : null}

@@ -24,6 +24,9 @@ const EmptyAnimation = (props: EmptyAnimationProps) => {
         title="Start Practicing"
         titleStyle={styles.title}
         buttonStyle={styles.button}
+        containerStyle={{
+          marginTop: 15,
+        }}
         type="solid"
         icon={<Entypo name="flash" size={24} color="white" />}
         onPress={() => {
@@ -41,8 +44,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 1,
     justifyContent: "space-between",
-    paddingTop: 30,
-    paddingBottom: 30,
+    paddingTop: 0,
   },
   lottie: {
     alignSelf: "center",
