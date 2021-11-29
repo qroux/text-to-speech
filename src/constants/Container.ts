@@ -10,6 +10,11 @@ export const sharedStyles = {
     padding: 5,
     marginBottom: 20,
   },
+  flexContainer: {
+    flex: 1,
+    width: "100%",
+    padding: 5,
+  },
   sectionTitle: {
     fontWeight: "bold",
     fontSize: 24,

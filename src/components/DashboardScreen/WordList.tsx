@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Text, View, StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
+import { View, Text } from "../Themed";
 
 interface WordListProps {
   list: any;

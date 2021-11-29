@@ -39,6 +39,10 @@ export default EmptyAnimation;
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+    flex: 1,
+    justifyContent: "space-between",
+    paddingTop: 30,
+    paddingBottom: 30,
   },
   lottie: {
     alignSelf: "center",
@@ -54,7 +58,6 @@ const styles = StyleSheet.create({
     width: "80%",
     backgroundColor: Colors.light.primary,
     alignSelf: "center",
-    marginTop: 15,
     borderRadius: 50,
   },
   title: {

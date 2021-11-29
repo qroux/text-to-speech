@@ -9,12 +9,18 @@ import EmptyAnimation from "./EmptyAnimation";
 import WordList from "./WordList";
 
 interface VocabularySectionProps {
-  words: string[];
+  words: {
+    [key: string]: number;
+  };
 }
 
 const VocabularySection = ({ words }: VocabularySectionProps) => {
   const [sorting, setSorting] = useState(true);
   const sortingIndex = sorting ? 1 : 0;
+
+  const isEmpty = () => {
+    return Object.keys(words).length <= 0;
+  };
 
   const sortedList = () => {
     const sortable = [];
@@ -32,7 +38,7 @@ const VocabularySection = ({ words }: VocabularySectionProps) => {
   };
 
   return (
-    <View style={sharedStyles.sectionContainer}>
+    <View style={sharedStyles.flexContainer}>
       <View style={styles.headerContainer}>
         <Text style={sharedStyles.sectionTitle}>Vocabulary</Text>
         <Button
@@ -40,12 +46,13 @@ const VocabularySection = ({ words }: VocabularySectionProps) => {
             <FontAwesome
               name={sortingIndex ? "sort-numeric-desc" : "sort-alpha-asc"}
               size={28}
-              color={Colors.light.primary}
+              color={isEmpty() ? "transparent" : Colors.light.primary}
             />
           }
           onPress={() => {
             setSorting(!sorting);
           }}
+          disabled={isEmpty()}
           buttonStyle={styles.button}
           type="clear"
         />
@@ -74,10 +81,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     paddingTop: 15,
   },
-  buttonContainer: {
-    // flexDirection: "row",
-    // justifyContent: "flex-end",
-  },
+  buttonContainer: {},
   button: {
     width: 45,
   },
