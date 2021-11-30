@@ -13,7 +13,7 @@ export default ImagePreview;
 
 const styles = StyleSheet.create({
   image: {
-    width: "90%",
+    width: "100%",
     height: 400,
     resizeMode: "cover",
     marginBottom: 20,

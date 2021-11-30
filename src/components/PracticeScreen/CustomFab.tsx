@@ -1,6 +1,7 @@
 import {
   AntDesign,
   Entypo,
+  Feather,
   FontAwesome,
   MaterialIcons,
 } from "@expo/vector-icons";
@@ -21,7 +22,7 @@ const CustomFab = ({ img, loading, firstAction, secondAction }: FabProps) => {
     <Button
       title={
         img ? (
-          <MaterialIcons name="record-voice-over" size={24} color="white" />
+          <Feather name="upload" size={24} color="white" />
         ) : (
           <Entypo name="plus" size={24} color="white" />
         )
@@ -30,7 +31,7 @@ const CustomFab = ({ img, loading, firstAction, secondAction }: FabProps) => {
       loading={loading}
       buttonStyle={{
         ...styles.fab,
-        backgroundColor: img ? Colors.light.tint : Colors.light.tint,
+        backgroundColor: img ? "orange" : Colors.light.tint,
       }}
     />
   );

@@ -1,20 +1,14 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
-import * as Speech from "expo-speech";
 
 import { Context as AppContext } from "../context/AppContext";
 
 import { Text, View } from "../components/Themed";
 import { ImagePicking } from "../components/PracticeScreen/ImagePicking";
-import { recognizeImage } from "../helpers/mlkit";
-import { sanitizeString } from "../helpers/sanitizeString";
-import ArrowAnimation from "../components/PracticeScreen/ArrowAnimation";
-
-type BlockContent = {
-  text: string;
-};
-
-type Blocks = BlockContent[];
+import { Blocks, recognizeImage } from "../helpers/mlkit";
+import { concatTextBlocks, sanitizeString } from "../helpers/resultProcessing";
+import { sharedStyles } from "../constants/Container";
+import { speak } from "../helpers/voiceSynth";
 
 export default function PracticeScreen() {
   const {
@@ -23,20 +17,8 @@ export default function PracticeScreen() {
   const [result, setResult] = useState<Blocks>([]);
   const [error, setError] = useState<any>("");
 
-  const concatTextBlocks = () => {
-    const humanizedBlocks = result.map((block: BlockContent) =>
-      block.text.replace(/(\r\n|\n|\r)/gm, " ")
-    );
-    return humanizedBlocks.join(" ");
-  };
-
-  const speak = (word: any) => {
-    Speech.VoiceQuality.Enhanced;
-    Speech.speak(word, { language: "en-USA", rate: 0.7 });
-  };
-
   const renderWords = () => {
-    return concatTextBlocks()
+    return concatTextBlocks(result)
       .split(" ")
       .map((word: string) => {
         return (
@@ -55,33 +37,35 @@ export default function PracticeScreen() {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-      }}
-    >
+    <View style={sharedStyles.pageContainer}>
+      {/* EmptyAnimation + ImagePicking + Header right Icon process CTA component  */}
       <ImagePicking
         recognizeImage={recognizeImage}
         setResult={setResult}
         setError={setError}
+        result={result}
       />
 
-      <ArrowAnimation />
-
-      <ScrollView style={styles.scrollView}>
-        {error ? <Text>{error}</Text> : null}
-        <View style={styles.container}>{renderWords()}</View>
-      </ScrollView>
+      {/* EXTRACTED CONTENT RENDERING */}
+      {result.length > 0 ? (
+        <ScrollView style={styles.scrollView}>
+          {error ? <Text>{error}</Text> : null}
+          <View style={styles.container}>{renderWords()}</View>
+        </ScrollView>
+      ) : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  pageContainer: {
+    flex: 1,
+  },
   scrollView: {},
   container: {
     flexDirection: "row",
     flexWrap: "wrap",
-    padding: 15,
+
     flex: 1,
   },
   title: {

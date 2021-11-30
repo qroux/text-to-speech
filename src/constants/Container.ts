@@ -1,4 +1,8 @@
 export const sharedStyles = {
+  pageContainer: {
+    flex: 1,
+    padding: 15,
+  },
   sectionContainer: {
     borderColor: "transparent",
     borderRadius: 5,

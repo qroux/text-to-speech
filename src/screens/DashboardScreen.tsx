@@ -11,6 +11,7 @@ import VocabularySection from "../components/DashboardScreen/VocabularySection";
 import { Button } from "react-native-elements";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchStorage } from "../context/fetchStorage";
+import { sharedStyles } from "../constants/Container";
 
 export default function DashboardScreen() {
   const {
@@ -35,7 +36,7 @@ export default function DashboardScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={sharedStyles.pageContainer}>
       <Section title="Overall Progress">
         <Item label="Clicks" value={0} />
         <Item label="Vocabulary" value={0} unit={"words"} />
@@ -46,21 +47,4 @@ export default function DashboardScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    // borderColor: "blue",
-    // borderWidth: 2,
-    padding: 15,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
-  },
-});
+const styles = StyleSheet.create({});

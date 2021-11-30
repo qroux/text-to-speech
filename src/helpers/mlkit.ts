@@ -24,6 +24,12 @@ export type Response = {
   blocks: Block[];
 };
 
+export type BlockContent = {
+  text: string;
+};
+
+export type Blocks = BlockContent[];
+
 export const recognizeImage = (url: string): Promise<Response> => {
   return TextRecognitionModule.recognizeImage(url);
 };

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Platform, Image, View, StyleSheet } from "react-native";
-import { Button, FAB } from "react-native-elements";
+import { Platform, View, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import Colors from "../constants/Colors";
-import { Entypo, AntDesign, FontAwesome } from "@expo/vector-icons";
-import { Response } from "./helpers/mlkit";
+import type { Blocks, Response } from "../../helpers/mlkit";
 import CustomFab from "./CustomFab";
 import ImagePreview from "./ImagePreview";
 import { useNavigation } from "@react-navigation/native";
+import ArrowAnimation from "./ArrowAnimation";
 
 const ImagePicking = ({
+  result,
   setResult,
   setError,
   recognizeImage,
 }: {
+  result: Blocks;
   setError: React.Dispatch<any>;
   setResult: React.Dispatch<any>;
   recognizeImage: (url: string) => Promise<Response>;
@@ -77,8 +77,11 @@ const ImagePicking = ({
           width: "100%",
           flexDirection: "row",
           justifyContent: "center",
+          // borderColor: "blue",
+          // borderWidth: 1,
         }}
       >
+        <ArrowAnimation hidden={img || result.length > 0} />
         <ImagePreview img={img} />
       </View>
     </View>
@@ -88,7 +91,8 @@ const ImagePicking = ({
 const styles = StyleSheet.create({
   mainContainer: {
     width: "100%",
-    position: "relative",
+    // borderColor: "red",
+    // borderWidth: 1,
   },
 });
 
