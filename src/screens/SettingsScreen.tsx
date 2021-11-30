@@ -9,25 +9,22 @@ import { Text, View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { Context as AppContext } from "../context/AppContext";
 import { sharedStyles } from "../constants/Container";
-import SettingSection from "../components/SettingsScreen/SettingSection";
+import SettingSection from "../components/SettingsScreen/SettingSectionButton";
+import SettingSectionSwitch from "../components/SettingsScreen/SettingSectionSwitch";
 
 export default function SettingsScreen() {
   const {
-    state: { keys },
-    actions: { resetWordContext },
+    state: { lang, keys },
+    actions: { toggleLang, resetWordContext },
   } = useContext(AppContext);
 
   return (
     <View style={styles.container}>
-      {/* <SettingSection
+      <SettingSectionSwitch
         sectionTitle="Language"
-        label="Switch Interface to French"
-        onPress={() =>
-          IntentLauncher.startActivityAsync(
-            IntentLauncher.ActivityAction.ACCESSIBILITY_SETTINGS
-          )
-        }
-      /> */}
+        onPress={toggleLang}
+        lang={lang}
+      />
 
       <SettingSection
         sectionTitle="Change Synth Accent"

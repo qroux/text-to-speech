@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: 18,
     width: "100%",
-    marginBottom: 20,
+    marginBottom: 15,
   },
   span: { fontWeight: "bold", color: Colors.light.primary, fontSize: 24 },
 });

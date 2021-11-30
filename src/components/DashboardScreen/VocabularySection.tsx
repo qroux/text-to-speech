@@ -7,6 +7,7 @@ import { sharedStyles } from "../../constants/Container";
 import { View, Text } from "../Themed";
 import EmptyAnimation from "./EmptyAnimation";
 import WordList from "./WordList";
+import i18n from "i18n-js";
 
 interface VocabularySectionProps {
   words: {
@@ -40,7 +41,9 @@ const VocabularySection = ({ words }: VocabularySectionProps) => {
   return (
     <View style={sharedStyles.flexContainer}>
       <View style={styles.headerContainer}>
-        <Text style={sharedStyles.sectionTitle}>Vocabulary</Text>
+        <Text style={sharedStyles.sectionTitle}>
+          {i18n.t("dashboard.vocabularySection")}
+        </Text>
         <Button
           icon={
             <FontAwesome

@@ -1,5 +1,7 @@
 import createDataContext from "./createDataContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Localization from "expo-localization";
+import i18n from "i18n-js";
 
 export enum Actions {
   toggleLang = "TOGGLELANG",
@@ -51,7 +53,7 @@ const AppReducer = (state: { [key: string]: any }, action: Action) => {
         keys: [],
       };
     case Actions.toggleLang:
-      return { ...state, lang: state.lang === "fr" ? "en" : "fr", error: null };
+      return { ...state, lang: action.payload?.lang, error: null };
     case Actions.error:
       return { ...state, error: "something went wrong" };
     default:
@@ -60,7 +62,8 @@ const AppReducer = (state: { [key: string]: any }, action: Action) => {
 };
 
 // ACTIONS
-const toggleLang = (dispatch: (action: Action) => void) => async () => {
+const fetchLang = (dispatch: (action: Action) => void) => async () => {
+  const lang = "fr" || Localization.locale;
   try {
     dispatch({
       type: Actions.toggleLang,
@@ -69,6 +72,19 @@ const toggleLang = (dispatch: (action: Action) => void) => async () => {
     dispatch({ type: Actions.error });
   }
 };
+
+const toggleLang =
+  (dispatch: (action: Action) => void) => async (lang: string) => {
+    i18n.locale = lang;
+    try {
+      dispatch({
+        type: Actions.toggleLang,
+        payload: { lang },
+      });
+    } catch (err) {
+      dispatch({ type: Actions.error });
+    }
+  };
 
 const incrementWordCount =
   (dispatch: (action: Action) => void) => async (word: string) => {
@@ -114,7 +130,7 @@ export const { Provider, Context } = createDataContext({
     resetWordContext,
   },
   initialState: {
-    lang: "fr",
+    lang: "en",
     words: {},
   },
 });

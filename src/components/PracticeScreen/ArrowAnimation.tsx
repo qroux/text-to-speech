@@ -40,13 +40,9 @@ export default ArrowAnimation;
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    flex: 1,
     justifyContent: "center",
     paddingTop: 30,
-
     alignItems: "center",
-    // borderColor: "red",
-    // borderWidth: 1,
   },
   lottie: {
     alignSelf: "center",

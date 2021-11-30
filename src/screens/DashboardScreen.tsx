@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import * as Localization from "expo-localization";
 import i18n from "i18n-js";
 
-import { Text, View } from "../components/Themed";
+import { View, Text } from "../components/Themed";
 import { Context as AppContext, WordsObject } from "../context/AppContext";
 import Section from "../components/DashboardScreen/Section";
 import Item from "../components/DashboardScreen/Item";
@@ -15,17 +15,9 @@ import { sharedStyles } from "../constants/Container";
 
 export default function DashboardScreen() {
   const {
-    state: { words, keys },
+    state: { lang, words, keys },
     actions: { populateWordContext },
   } = useContext(AppContext);
-  // Set the key-value pairs for the different languages you want to support.
-  i18n.translations = {
-    en: { title: "Progress Dashboard Lang: ENG" },
-    "fr-FR": { title: "Progress Dashboard Lang: FR" },
-  };
-  // Set the locale once at the beginning of your app.
-  i18n.locale = Localization.locale;
-  i18n.fallbacks = true;
 
   useEffect(() => {
     (async () => {
@@ -37,10 +29,18 @@ export default function DashboardScreen() {
 
   return (
     <View style={sharedStyles.pageContainer}>
-      <Section title="Overall Progress">
-        <Item label="Clicks" value={0} />
-        <Item label="Vocabulary" value={0} unit={"words"} />
-        <Item label="Goal" value={0} unit={"/ 3000 words"} />
+      <Section title={i18n.t("dashboard.title")}>
+        <Item label={i18n.t("dashboard.items.clicks")} value={0} />
+        <Item
+          label={i18n.t("dashboard.items.vocabulary.label")}
+          value={0}
+          unit={i18n.t("dashboard.items.vocabulary.unit")}
+        />
+        <Item
+          label={i18n.t("dashboard.items.goal.label")}
+          value={0}
+          unit={`/ 3000 ${i18n.t("dashboard.items.goal.unit")}`}
+        />
       </Section>
       <VocabularySection words={words} />
     </View>

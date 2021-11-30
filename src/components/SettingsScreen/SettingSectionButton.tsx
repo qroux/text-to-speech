@@ -12,7 +12,7 @@ interface SettingSectionProps {
   disabled?: boolean;
 }
 
-const SettingSection = ({
+const SettingSectionButton = ({
   sectionTitle,
   label,
   onPress,
@@ -37,7 +37,7 @@ const SettingSection = ({
   );
 };
 
-export default SettingSection;
+export default SettingSectionButton;
 
 const styles = StyleSheet.create({
   container: {
