@@ -31,7 +31,7 @@ const CustomFab = ({ img, loading, firstAction, secondAction }: FabProps) => {
       loading={loading}
       buttonStyle={{
         ...styles.fab,
-        backgroundColor: img ? "orange" : Colors.light.tint,
+        backgroundColor: img ? "#F87060" : Colors.light.tint,
       }}
     />
   );

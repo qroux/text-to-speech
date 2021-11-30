@@ -25,7 +25,7 @@ const EmptyAnimation = (props: EmptyAnimationProps) => {
         titleStyle={styles.title}
         buttonStyle={styles.button}
         containerStyle={{
-          marginTop: 15,
+          marginBottom: 30,
         }}
         type="solid"
         icon={<Entypo name="flash" size={24} color="white" />}

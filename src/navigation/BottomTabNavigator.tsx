@@ -3,11 +3,7 @@
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  createStackNavigator,
-  CardStyleInterpolators,
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 
 // SCREENS
@@ -27,10 +23,8 @@ import useColorScheme from "../hooks/useColorScheme";
 import {
   Ionicons,
   MaterialCommunityIcons,
-  MaterialIcons,
   AntDesign,
 } from "@expo/vector-icons";
-import { Button } from "react-native-elements";
 
 const BottomTab = createMaterialTopTabNavigator<BottomTabParamList>();
 
@@ -45,6 +39,7 @@ export default function BottomTabNavigator() {
         activeTintColor: Colors[colorScheme].tint,
         showIcon: true,
         showLabel: false,
+        indicatorStyle: { backgroundColor: Colors.light.primary },
       }}
     >
       <BottomTab.Screen
