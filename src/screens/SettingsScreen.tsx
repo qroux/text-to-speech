@@ -9,6 +9,7 @@ import { Text, View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { Context as AppContext } from "../context/AppContext";
 import { sharedStyles } from "../constants/Container";
+import SettingSection from "../components/SettingsScreen/SettingSection";
 
 export default function SettingsScreen() {
   const {
@@ -18,36 +19,36 @@ export default function SettingsScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.sectionContainer}>
-        <Text style={sharedStyles.sectionTitle}>Vocal Synthesis</Text>
-        <Button
-          title={"Change Synth Accent"}
-          titleStyle={{ color: Colors.light.primary }}
-          onPress={() =>
-            IntentLauncher.startActivityAsync(
-              IntentLauncher.ActivityAction.ACCESSIBILITY_SETTINGS
-            )
-          }
-          buttonStyle={styles.button}
-          type="clear"
-        />
-      </View>
-      <Divider />
+      {/* <SettingSection
+        sectionTitle="Language"
+        label="Switch Interface to French"
+        onPress={() =>
+          IntentLauncher.startActivityAsync(
+            IntentLauncher.ActivityAction.ACCESSIBILITY_SETTINGS
+          )
+        }
+      /> */}
 
-      <View style={styles.sectionContainer}>
-        <Text style={sharedStyles.sectionTitle}>Storage</Text>
-        <Button
-          title="Reset App Memory"
-          titleStyle={{ color: Colors.light.primary }}
-          disabled={keys?.length == 0}
-          onPress={async () => {
-            await AsyncStorage.multiRemove(keys);
-            resetWordContext();
-          }}
-          buttonStyle={styles.button}
-          type="clear"
-        />
-      </View>
+      <SettingSection
+        sectionTitle="Change Synth Accent"
+        label="Change Synth Accent"
+        onPress={() =>
+          IntentLauncher.startActivityAsync(
+            IntentLauncher.ActivityAction.ACCESSIBILITY_SETTINGS
+          )
+        }
+      />
+
+      <SettingSection
+        sectionTitle="Storage"
+        label="Reset App Memory"
+        onPress={async () => {
+          await AsyncStorage.multiRemove(keys);
+          resetWordContext();
+        }}
+        disabled={keys?.length == 0}
+        divider={false}
+      />
     </View>
   );
 }
