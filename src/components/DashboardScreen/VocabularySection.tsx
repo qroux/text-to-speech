@@ -1,7 +1,7 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
-import { Divider, Button } from "react-native-elements";
+import { Button } from "react-native-elements";
 import Colors from "../../constants/Colors";
 import { sharedStyles } from "../../constants/Container";
 import { View, Text } from "../Themed";

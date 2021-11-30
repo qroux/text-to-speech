@@ -1,4 +1,6 @@
-export const sharedStyles = {
+import { StyleSheet } from "react-native";
+
+export const sharedStyles = StyleSheet.create({
   pageContainer: {
     flex: 1,
     padding: 15,
@@ -24,4 +26,4 @@ export const sharedStyles = {
     fontSize: 24,
     paddingBottom: 15,
   },
-};
+});

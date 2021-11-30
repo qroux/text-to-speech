@@ -77,8 +77,6 @@ const ImagePicking = ({
           width: "100%",
           flexDirection: "row",
           justifyContent: "center",
-          // borderColor: "blue",
-          // borderWidth: 1,
         }}
       >
         <ArrowAnimation hidden={img || result.length > 0} />
@@ -91,8 +89,6 @@ const ImagePicking = ({
 const styles = StyleSheet.create({
   mainContainer: {
     width: "100%",
-    // borderColor: "red",
-    // borderWidth: 1,
   },
 });
 
