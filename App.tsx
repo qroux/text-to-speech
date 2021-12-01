@@ -11,12 +11,12 @@ import Navigation from "./src/navigation";
 import { Provider as AppProvider } from "./src/context/AppContext";
 
 // internationalization
-import * as Localization from "expo-localization";
 import i18n from "i18n-js";
 
 i18n.translations = {
   en: {
     dashboard: {
+      screenTitle: "Dashboard",
       title: "Overall Progress",
       items: {
         clicks: "Clicks",
@@ -30,14 +30,41 @@ i18n.translations = {
         },
       },
       vocabularySection: "Vocabulary",
+      cta: "Start Practicing",
+    },
+    practice: {
+      screenTitle: "Practice",
+      instructions: {
+        import: {
+          span: "Import",
+          text: "an image/photo containing some text content",
+        },
+        process: {
+          span: "Process",
+          text: "the image to extract its text content",
+        },
+        practice: {
+          span: "Practice",
+          text: "your prononciation by clicking on the desired word",
+        },
+      },
     },
     settings: {
-      title: "test title",
-      content: "test content",
+      screenTitle: "App Settings",
+      language: "App Language",
+      synth: {
+        title: "Vocal Synth",
+        button: "Change accent",
+      },
+      storage: {
+        title: "Storage",
+        button: "App Memory Reset",
+      },
     },
   },
   fr: {
     dashboard: {
+      screenTitle: "Tableau De Bord",
       title: "Progression",
       items: {
         clicks: "Clicks",
@@ -51,15 +78,40 @@ i18n.translations = {
         },
       },
       vocabularySection: "Vocabulaire",
+      cta: "Commencer !",
+    },
+    practice: {
+      screenTitle: "S'entrainer",
+      instructions: {
+        import: {
+          span: "Importer",
+          text: "une image/photo contenant du text en anglais",
+        },
+        process: {
+          span: "Extraire",
+          text: "le contenu textuel de l'image selectionnée",
+        },
+        practice: {
+          span: "Entrainer",
+          text: "vous en cliquant sur les mots inconnus ou dont la prononciation vous échappe",
+        },
+      },
     },
     settings: {
-      title: "test title",
-      content: "test content",
+      screenTitle: "Pramètres de l'Application",
+      language: "Langue de l'interface",
+      synth: {
+        title: "Synthèse Vocale",
+        button: "Changer l'accent",
+      },
+      storage: {
+        title: "Mémoire De l'App",
+        button: "Remise à Zero",
+      },
     },
   },
 };
 
-// i18n.locale = "FR";
 i18n.fallbacks = true;
 
 export default function App() {

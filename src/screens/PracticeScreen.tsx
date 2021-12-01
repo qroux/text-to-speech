@@ -9,13 +9,17 @@ import { Blocks, recognizeImage } from "../helpers/mlkit";
 import { concatTextBlocks, sanitizeString } from "../helpers/resultProcessing";
 import { sharedStyles } from "../constants/Container";
 import { speak } from "../helpers/voiceSynth";
+import { useHeaderTitle } from "../hooks/useHeaderTitle";
 
 export default function PracticeScreen() {
   const {
+    state: { lang },
     actions: { incrementWordCount },
   } = useContext(AppContext);
   const [result, setResult] = useState<Blocks>([]);
   const [error, setError] = useState<any>("");
+
+  useHeaderTitle({ lang, ressource: "practice.screenTitle" });
 
   const renderWords = () => {
     return concatTextBlocks(result)

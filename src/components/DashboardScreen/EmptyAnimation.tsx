@@ -6,6 +6,7 @@ import { Button } from "react-native-elements";
 import Colors from "../../constants/Colors";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { internationalize } from "../../helpers/internationalize";
 
 interface EmptyAnimationProps {}
 
@@ -21,7 +22,7 @@ const EmptyAnimation = (props: EmptyAnimationProps) => {
         style={styles.lottie}
       />
       <Button
-        title="Start Practicing"
+        title={internationalize("dashboard.cta")}
         titleStyle={styles.title}
         buttonStyle={styles.button}
         containerStyle={{

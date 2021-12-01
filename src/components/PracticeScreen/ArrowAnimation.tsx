@@ -2,8 +2,8 @@ import * as React from "react";
 import { StyleSheet } from "react-native";
 import LottieView from "lottie-react-native";
 import { View, Text } from "../Themed";
-import Colors from "../../constants/Colors";
 import InstructionText from "./InstructionText";
+import { internationalize } from "../../helpers/internationalize";
 
 interface ArrowAnimationProps {
   hidden: boolean;
@@ -20,16 +20,16 @@ const ArrowAnimation = ({ hidden }: ArrowAnimationProps) => {
         style={styles.lottie}
       />
       <InstructionText
-        span={"Import"}
-        text={"an image/photo containing some text content."}
+        span={internationalize("practice.instructions.import.span")}
+        text={internationalize("practice.instructions.import.text")}
       />
       <InstructionText
-        span={"Process"}
-        text={"the image to extract its text content."}
+        span={internationalize("practice.instructions.process.span")}
+        text={internationalize("practice.instructions.process.text")}
       />
       <InstructionText
-        span={"Practice"}
-        text={"your prononciation by clicking on the desired word."}
+        span={internationalize("practice.instructions.practice.span")}
+        text={internationalize("practice.instructions.practice.text")}
       />
     </View>
   );
@@ -45,9 +45,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   lottie: {
-    // alignSelf: "center",
     height: 150,
-    width: "100%",
     marginBottom: 30,
   },
 });

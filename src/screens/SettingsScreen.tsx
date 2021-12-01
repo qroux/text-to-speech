@@ -11,6 +11,8 @@ import { Context as AppContext } from "../context/AppContext";
 import { sharedStyles } from "../constants/Container";
 import SettingSection from "../components/SettingsScreen/SettingSectionButton";
 import SettingSectionSwitch from "../components/SettingsScreen/SettingSectionSwitch";
+import { useHeaderTitle } from "../hooks/useHeaderTitle";
+import { internationalize } from "../helpers/internationalize";
 
 export default function SettingsScreen() {
   const {
@@ -18,17 +20,19 @@ export default function SettingsScreen() {
     actions: { toggleLang, resetWordContext },
   } = useContext(AppContext);
 
+  useHeaderTitle({ lang, ressource: "settings.screenTitle" });
+
   return (
     <View style={styles.container}>
       <SettingSectionSwitch
-        sectionTitle="Language"
+        sectionTitle={internationalize("settings.language")}
         onPress={toggleLang}
         lang={lang}
       />
 
       <SettingSection
-        sectionTitle="Change Synth Accent"
-        label="Change Synth Accent"
+        sectionTitle={internationalize("settings.synth.title")}
+        label={internationalize("settings.synth.button")}
         onPress={() =>
           IntentLauncher.startActivityAsync(
             IntentLauncher.ActivityAction.ACCESSIBILITY_SETTINGS
@@ -37,8 +41,8 @@ export default function SettingsScreen() {
       />
 
       <SettingSection
-        sectionTitle="Storage"
-        label="Reset App Memory"
+        sectionTitle={internationalize("settings.storage.title")}
+        label={internationalize("settings.storage.button")}
         onPress={async () => {
           await AsyncStorage.multiRemove(keys);
           resetWordContext();

@@ -25,5 +25,5 @@ const styles = StyleSheet.create({
     width: "100%",
     marginBottom: 15,
   },
-  span: { fontWeight: "bold", color: Colors.light.primary, fontSize: 24 },
+  span: { fontWeight: "bold", color: Colors.light.primary, fontSize: 20 },
 });
