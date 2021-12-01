@@ -45,8 +45,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   lottie: {
-    alignSelf: "center",
-    height: 120,
-    marginBottom: 100,
+    // alignSelf: "center",
+    height: 150,
+    width: "100%",
+    marginBottom: 30,
   },
 });

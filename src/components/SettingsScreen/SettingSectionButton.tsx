@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Button, Divider } from "react-native-elements";
 import Colors from "../../constants/Colors";
 import { sharedStyles } from "../../constants/Container";
+import { View, Text } from "../Themed";
 
 interface SettingSectionProps {
   sectionTitle: string;

@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Divider } from "react-native-elements";
 
 import { sharedStyles } from "../../constants/Container";
+import { View, Text } from "../Themed";
 import TouchableFlag from "./TouchableFlag";
 
 interface SettingSectionProps {

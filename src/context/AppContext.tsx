@@ -63,6 +63,7 @@ const AppReducer = (state: { [key: string]: any }, action: Action) => {
 
 // ACTIONS
 const fetchLang = (dispatch: (action: Action) => void) => async () => {
+  // MUST implement asyncstorage data key to save preference before using it
   const lang = "fr" || Localization.locale;
   try {
     dispatch({

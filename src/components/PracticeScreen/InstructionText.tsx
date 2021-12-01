@@ -1,6 +1,7 @@
 import * as React from "react";
-import { Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import Colors from "../../constants/Colors";
+import { Text } from "../Themed";
 
 interface InstructionTextProps {
   span: string;

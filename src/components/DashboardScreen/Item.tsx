@@ -1,6 +1,7 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
-import { View, Text, useThemeColor } from "../Themed";
+import { Text, StyleSheet } from "react-native";
+import Colors from "../../constants/Colors";
+import { View, useThemeColor } from "../Themed";
 
 interface ItemProps {
   label: string;
@@ -22,7 +23,7 @@ const Item = ({
     <View style={{ ...styles.container, borderColor: color }}>
       <Text style={styles.label}>{label}</Text>
       <View style={styles.contentContainer}>
-        <Text>{value}</Text>
+        <Text style={styles.count}>{value}</Text>
         <Text style={styles.unit}>{unit}</Text>
       </View>
     </View>
@@ -34,7 +35,7 @@ export default Item;
 const styles = StyleSheet.create({
   container: {
     // borderColor: "rgba(0,0,0, 0.1)",
-    backgroundColor: "rgba(0,0,0, .1)",
+    backgroundColor: Colors.light.primary,
     borderWidth: 0.3,
     borderRadius: 5,
     width: "32%",
@@ -45,6 +46,7 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: "bold",
     fontSize: 18,
+    color: "white",
   },
   contentContainer: {
     paddingTop: 15,
@@ -52,7 +54,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "transparent",
   },
+  count: {
+    color: "white",
+  },
   unit: {
     fontWeight: "bold",
+    color: "white",
   },
 });
