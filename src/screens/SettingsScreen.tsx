@@ -13,6 +13,7 @@ import SettingSection from "../components/SettingsScreen/SettingSectionButton";
 import SettingSectionSwitch from "../components/SettingsScreen/SettingSectionSwitch";
 import { useHeaderTitle } from "../hooks/useHeaderTitle";
 import { internationalize } from "../helpers/internationalize";
+import { PlatformList } from "../constants/PlatformList";
 
 export default function SettingsScreen() {
   const {
@@ -38,6 +39,7 @@ export default function SettingsScreen() {
             IntentLauncher.ActivityAction.ACCESSIBILITY_SETTINGS
           )
         }
+        platform={[PlatformList.android]}
       />
 
       <SettingSection
